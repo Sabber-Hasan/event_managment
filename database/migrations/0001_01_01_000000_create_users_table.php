@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('image')->nullable()->default(null);
             $table->string('password');
             $table->set('role', ['admin', 'merchant', 'user'])->default('user');
-            $table->set('stauus', ['1', '0'])->default('1');
+            $table->set('stauus', [1, 0])->default(1);
             $table->rememberToken();
             $table->timestamps();
         });
