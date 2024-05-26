@@ -14,11 +14,17 @@ return new class extends Migration
         Schema::create('users', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->string('first_name');
+            $table->string('last_name');
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
+            $table->string('phone', 15)->nullable();
+            $table->string('city', 100)->nullable();
+            $table->string('address',500)->nullable();
+            $table->string('image')->nullable()->default(null);
             $table->string('password');
-            $table->set('role', ['admin', 'employee', 'accountant', 'user'])->default('user');
-            $table->set('stauus', ['activate', 'deactivate'])->default('activate');
+            $table->set('role', ['admin', 'merchant', 'user'])->default('user');
+            $table->set('stauus', ['1', '0'])->default('1');
             $table->rememberToken();
             $table->timestamps();
         });
