@@ -12,7 +12,7 @@ class UserController extends Controller
         // $allUser = User::paginate(10);
         //$allUser = User::with('profile')->paginate(10);
         // dd($allUser);
-        return "<h1>admin</h1>";
-        //return view('admin.dashboard');
+        //return "<h1>admin</h1>";
+        return view('admin.dashboard');
     }
 }
