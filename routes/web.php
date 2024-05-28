@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckAdminUser;
 use App\Http\Controllers\UserController;
+// use bootstrap\app;
 
 Route::get('/', function () {
     return view('welcome');

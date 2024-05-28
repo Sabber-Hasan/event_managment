@@ -18,8 +18,8 @@ class CheckAdminUser
     {
         if (Auth::check()) {
             if (Auth::user()->role === 'admin') {
-                return redirect()->route('admin');
-                //return $next($request);
+                //return redirect()->route('admin');
+                  return $next($request);
             }
             // if (Auth::user()->role === 'merchant') {
             //     return redirect()->route('merchant');
