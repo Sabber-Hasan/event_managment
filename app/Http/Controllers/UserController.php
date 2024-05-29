@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -13,6 +14,12 @@ class UserController extends Controller
         //$allUser = User::with('profile')->paginate(10);
         // dd($allUser);
         //return "<h1>admin</h1>";
-        return view('admin.dashboard');
+        if (Auth::user()->role === 'admin'){
+            return view('admin.dashboard');
+        }
+        if (Auth::user()->role === 'user'){
+            return view('user.dashboard');
+        }
+        
     }
 }

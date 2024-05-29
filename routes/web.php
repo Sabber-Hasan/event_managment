@@ -3,6 +3,7 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Middleware\CheckAdminUser;
+use App\Http\Middleware\CheckUser;
 use App\Http\Controllers\UserController;
 // use bootstrap\app;
 
@@ -20,7 +21,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 Route::middleware(CheckAdminUser::class)->group(function () {
-    Route::get('/try', [UserController::class, 'index']);
+    Route::get('/admin', [UserController::class, 'index']);
+    
+});
+Route::middleware(CheckUser::class)->group(function () {
+    Route::get('/dashboard', [UserController::class, 'index']);
     
 });
 

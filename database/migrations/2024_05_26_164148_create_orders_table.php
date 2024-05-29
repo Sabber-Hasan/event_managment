@@ -20,7 +20,7 @@ return new class extends Migration
             $table->float('total',10,2);
             $table->float('discount',10,2)->nullable()->default(null);
             $table->float('vat',10,2)->nullable();
-            $table->string('method')->required();
+            $table->set('payment_method', ['cash','bkash','nogod','upay','visa','master card','online banking'])->default(null);
             $table->string('transaction_id')->nullable(null);
             $table->string('comment')->nullable()->default(null);
             $table->set('status',['gt','st','dn'])->default('gt')->comment('Status of the entity: gt = get order, st = processing, dn = done');
