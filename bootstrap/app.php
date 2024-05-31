@@ -1,7 +1,8 @@
 <?php
 
-use App\Http\Middleware\CheckAdminUser;
-use App\Http\Middleware\CheckMerchantUser;
+use App\Http\Middleware\CheckAdminRole;
+use App\Http\Middleware\CheckMerchantRole;
+use App\Http\Middleware\CheckUserRole;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -13,9 +14,9 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware) {
-       // $middleware->append(CheckAdminRole::class);
-       $middleware->alias(['admin' => CheckAdminUser::class]);
-       $middleware->alias(['merchant' => CheckMerchantUser::class]);
+        $middleware->alias(['admin' => CheckAdminRole::class]);
+        $middleware->alias(['merchant' => CheckMerchantRole::class]);
+        $middleware->alias(['user' => CheckUserRole::class]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
         //

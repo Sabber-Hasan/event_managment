@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\notice;
+use App\Models\Notice;
 use Illuminate\Http\Request;
 
 class NoticeController extends Controller
@@ -34,7 +34,7 @@ class NoticeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(notice $notice)
+    public function show(Notice $notice)
     {
         //
     }
@@ -42,7 +42,7 @@ class NoticeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(notice $notice)
+    public function edit(Notice $notice)
     {
         //
     }
@@ -50,7 +50,7 @@ class NoticeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, notice $notice)
+    public function update(Request $request, Notice $notice)
     {
         //
     }
@@ -58,7 +58,7 @@ class NoticeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(notice $notice)
+    public function destroy(Notice $notice)
     {
         //
     }

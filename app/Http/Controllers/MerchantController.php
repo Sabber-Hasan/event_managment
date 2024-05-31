@@ -2,9 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\merchant;
-use App\Http\Requests\StoremerchantRequest;
-use App\Http\Requests\UpdatemerchantRequest;
+use App\Models\Merchant;
+use Illuminate\Http\Request;
 
 class MerchantController extends Controller
 {
@@ -27,7 +26,7 @@ class MerchantController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(StoremerchantRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -35,7 +34,7 @@ class MerchantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(merchant $merchant)
+    public function show(Merchant $merchant)
     {
         //
     }
@@ -43,7 +42,7 @@ class MerchantController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(merchant $merchant)
+    public function edit(Merchant $merchant)
     {
         //
     }
@@ -51,7 +50,7 @@ class MerchantController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(UpdatemerchantRequest $request, merchant $merchant)
+    public function update(Request $request, Merchant $merchant)
     {
         //
     }
@@ -59,7 +58,7 @@ class MerchantController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(merchant $merchant)
+    public function destroy(Merchant $merchant)
     {
         //
     }

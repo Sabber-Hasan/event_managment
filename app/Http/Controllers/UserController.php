@@ -7,19 +7,76 @@ use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        // $allUser = User::all();
-        // $allUser = User::paginate(10);
-        //$allUser = User::with('profile')->paginate(10);
-        // dd($allUser);
-        //return "<h1>admin</h1>";
-        if (Auth::user()->role === 'admin'){
+       if (Auth::check()) {
+        if (Auth::user()->role ==='admin') {
             return view('admin.dashboard');
         }
-        if (Auth::user()->role === 'user'){
+        elseif (Auth::user()->role ==='merchant') {
+            return view('merchant.dashboard');
+        }
+        elseif (Auth::user()->role ==='user') {
             return view('user.dashboard');
         }
-        
+        // else {
+        //     return view('user.dashboard');
+        // }
+       
+       }
+       else {
+        return view('dashboard');
+    }
+    }
+
+    /**
+     * Show the form for creating a new resource.
+     */
+    public function create()
+    {
+        //
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     */
+    public function store(Request $request)
+    {
+        //
+    }
+
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        //
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }

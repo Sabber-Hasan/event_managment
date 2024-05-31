@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\platter;
+use App\Models\Platter;
 use Illuminate\Http\Request;
 
 class PlatterController extends Controller
@@ -34,7 +34,7 @@ class PlatterController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(platter $platter)
+    public function show(Platter $platter)
     {
         //
     }
@@ -42,7 +42,7 @@ class PlatterController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(platter $platter)
+    public function edit(Platter $platter)
     {
         //
     }
@@ -50,7 +50,7 @@ class PlatterController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, platter $platter)
+    public function update(Request $request, Platter $platter)
     {
         //
     }
@@ -58,7 +58,7 @@ class PlatterController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(platter $platter)
+    public function destroy(Platter $platter)
     {
         //
     }

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class CheckMerchantUser
+class CheckUserRole
 {
     /**
      * Handle an incoming request.
@@ -17,9 +17,9 @@ class CheckMerchantUser
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::check()) {
-           if (Auth::user()->role === 'merchant') {
-            return $next($request);
-           }
+            if (Auth::user()->role === 'user') {
+                return $next($request);
+            }
         }
         return redirect()->route('dashboard')->with('error', 'You are not authorized to access this page.');
     }
