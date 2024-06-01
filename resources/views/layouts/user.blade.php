@@ -57,7 +57,7 @@
                         <a href="#demo" class="nav-link">Demos</a>
                     </li>
                     <li class="nav-item">
-                        <a href="#clients" class="nav-link bg-secondary ">Switch to Merchant</a>
+                        <a href="#clients" class="nav-link bg-success ">Switch to Merchant</a>
                     </li>
                     <li class="nav-item">
                         <a href="#pricing" class="nav-link">Pricing</a>
@@ -66,20 +66,55 @@
                     <li class="nav-item">
                         <a href="#contact" class="nav-link">Contact</a>
                     </li>
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link ">{{Auth::user()->name}}</a>
+                    <li class="dropdown notification-list topbar-dropdown">
+                        <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
+                            data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
+                            aria-expanded="false">
+                            {{-- <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="user-image"
+                                class="rounded-circle"> --}}
+                            <span class="pro-user-name ms-1 bg-success">
+                                {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
+                            </span>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
+                            <!-- item-->
+                            <div class="dropdown-header noti-title">
+                                <h6 class="text-overflow m-0">Welcome !</h6>
+                            </div>
+    
+                            <!-- item-->
+                            <a href="contacts-profile.html" class="dropdown-item notify-item">
+                                
+                                <span>My Account</span>
+                            </a>
+    
+                            <!-- item-->
+                            <a href="auth-lock-screen.html" class="dropdown-item notify-item">
+                                
+                                <span>Lock Screen</span>
+                            </a>
+    
+                            
+    
+                            <!-- item-->
+                            {{-- <a href="" class="dropdown-item notify-item"> --}}
+                                
+                                <span>
+                                    <form method="POST" action="{{ route('logout') }}">
+                                        @csrf
+            
+                                        <x-dropdown-link :href="route('logout')"
+                                                onclick="event.preventDefault();
+                                                            this.closest('form').submit();">
+                                            {{ __('Log Out') }}
+                                        </x-dropdown-link>
+                                    </form>
+                                </span>
+                            {{-- </a> --}}
+    
+                        </div>
                     </li>
-                    <li class="nav-item">
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
-                                                    this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
-                    </li>
+                    
                 </ul>
             </div>
         </div>

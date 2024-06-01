@@ -225,7 +225,7 @@
                         <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="user-image"
                             class="rounded-circle">
                         <span class="pro-user-name ms-1">
-                            {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
+                            {{ Auth::user()->name }} 
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -236,21 +236,20 @@
 
                         <!-- item-->
                         <a href="contacts-profile.html" class="dropdown-item notify-item">
-                            <i class="fe-user"></i>
+                           
                             <span>My Account</span>
                         </a>
 
                         <!-- item-->
                         <a href="auth-lock-screen.html" class="dropdown-item notify-item">
-                            <i class="fe-lock"></i>
+                            
                             <span>Lock Screen</span>
                         </a>
 
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        <a href="" class="dropdown-item notify-item">
-                            <i class="fe-log-out"></i>
+                        
                             <span>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
@@ -262,7 +261,7 @@
                                     </x-dropdown-link>
                                 </form>
                             </span>
-                        </a>
+                       
 
                     </div>
                 </li>
@@ -325,7 +324,7 @@
                         class="rounded-circle img-thumbnail avatar-md">
                     <div class="dropdown">
                         <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block"
-                            data-bs-toggle="dropdown" aria-expanded="false">Nowak Helme</a>
+                            data-bs-toggle="dropdown" aria-expanded="false"> {{ Auth::user()->name }}</a>
                         <div class="dropdown-menu user-pro-dropdown">
 
                             <!-- item-->
@@ -347,10 +346,19 @@
                             </a>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-log-out me-1"></i>
-                                <span>Logout</span>
-                            </a>
+                           
+                                
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                  
+                                    <x-dropdown-link :href="route('logout')"
+                                            onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                        {{ __('Log Out') }}
+                                    </x-dropdown-link>
+                                </form>
+                                
+                         
 
                         </div>
                     </div>
@@ -380,26 +388,60 @@
                         <li class="menu-title">Navigation</li>
 
                         <li>
-                            <a href="index.html">
+                            <a href="{{route('admin')}}">
                                 <i class="mdi mdi-view-dashboard-outline"></i>
                                 <span class="badge bg-success rounded-pill float-end">9+</span>
                                 <span> Dashboard </span>
                             </a>
                         </li>
 
-                        <li class="menu-title mt-2">Apps</li>
+                        <li class="menu-title mt-2">Features</li>
 
+                        <li>
+                            <a href="#email" data-bs-toggle="collapse">
+                                <i class="mdi mdi-email-outline"></i>
+                                <span> Roles </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="email">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="email-inbox.html">Inbox</a>
+                                    </li>
+                                    <li>
+                                        <a href="email-templates.html">Email Templates</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <a href="#email" data-bs-toggle="collapse">
+                                <i class="mdi mdi-email-outline"></i>
+                                <span> Roles </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="email">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="email-inbox.html">Inbox</a>
+                                    </li>
+                                    <li>
+                                        <a href="email-templates.html">Email Templates</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li>
+                            <a href="{{route('categories.index')}}">
+                                <i class="mdi mdi-calendar-blank-outline"></i>
+                                <span> Categories </span>
+                            </a>
+                        </li>
                         <li>
                             <a href="apps-calendar.html">
                                 <i class="mdi mdi-calendar-blank-outline"></i>
                                 <span> Calendar </span>
-                            </a>
-                        </li>
-
-                        <li>
-                            <a href="apps-chat.html">
-                                <i class="mdi mdi-forum-outline"></i>
-                                <span> Chat </span>
                             </a>
                         </li>
 
@@ -421,30 +463,9 @@
                             </div>
                         </li>
 
-                        <li>
-                            <a href="#sidebarTasks" data-bs-toggle="collapse">
-                                <i class="mdi mdi-clipboard-outline"></i>
-                                <span> Tasks </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="sidebarTasks">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <a href="task-kanban-board.html">Kanban Board</a>
-                                    </li>
-                                    <li>
-                                        <a href="task-details.html">Details</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
+                        
 
-                        <li>
-                            <a href="apps-projects.html">
-                                <i class="mdi mdi-briefcase-variant-outline"></i>
-                                <span> Projects </span>
-                            </a>
-                        </li>
+                       
 
                         <li>
                             <a href="#contacts" data-bs-toggle="collapse">

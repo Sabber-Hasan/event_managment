@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdminRole;
@@ -32,8 +33,9 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
-Route::middleware(CheckAdminRole::class)->group(function () {
+Route::middleware(CheckAdminRole::class)->prefix('admin')->group(function () {
     Route::get('/admin', [UserController::class, 'index'])->name('admin');
+    Route::resource('categories', CategoryController::class);
 });
 Route::middleware(CheckMerchantRole::class)->group(function () {
     Route::get('/merchant', [UserController::class, 'index'])->name('merchant');
