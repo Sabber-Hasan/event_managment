@@ -20,10 +20,11 @@ return new class extends Migration
             $table->string('trade_license', 20);
             $table->string('account_type');
             $table->string('account_num');
-            $table->string('addres', 900);
+            $table->string('address', 900); // Fixed the typo from 'addres' to 'address'
             $table->string('city', 180);
             $table->string('site_url', 180)->nullable();
-            $table->set('stauts', [1, 0])->default(0);
+            $table->string('logo')->nullable(); // Added logo field
+            $table->set('status', [1, 0])->default(0); // Fixed the typo from 'stauts' to 'status'
             $table->timestamps();
         });
     }

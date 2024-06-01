@@ -20,7 +20,7 @@ class MerchantController extends Controller
      */
     public function create()
     {
-        //
+       return view('user.merchant.create');
     }
 
     /**
@@ -28,7 +28,20 @@ class MerchantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+         // Validate the request data
+         $validatedData = $request->validate([
+            'user_id' => 'nullable|integer|exists:users,id',
+            'company_name' => 'required|string|max:80',
+            'phone' => 'required|string|max:15',
+            'trade_license' => 'required|string|max:20',
+            'account_type' => 'required|string',
+            'account_num' => 'required|string',
+            'address' => 'required|string|max:900',
+            'city' => 'required|string|max:180',
+            'site_url' => 'nullable|url|max:180',
+            'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'nullable|boolean', // Allow nullable for status, will default to 0
+         ]);
     }
 
     /**
