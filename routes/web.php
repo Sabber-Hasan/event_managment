@@ -5,11 +5,23 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Middleware\CheckMerchantRole;
 use App\Http\Middleware\CheckUserRole;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/checkuser', function () {
+    if (Auth::user()->role ==='admin') {
+        return redirect()->intended(route('admin', absolute:false));
+    }
+    if (Auth::user()->role ==='merchant') {
+        return redirect()->intended(route('merchant', absolute:false));
+    }
+    if (Auth::user()->role ==='user') {
+        return redirect()->intended(route('user', absolute:false));
+    }
+})->middleware(['auth'])->name('checkuser');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
