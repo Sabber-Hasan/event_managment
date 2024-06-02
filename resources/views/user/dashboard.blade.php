@@ -1,6 +1,5 @@
-@extends('layouts.user' , ['title' => 'event managment'])
+@extends('layouts.user', ['title' => 'User Dashboard'])
+
 @section('content')
-<div class="tab-content" id="pills-tabContent">
-  <h3>I do not know</h3>  
-</div>
+    <h1>Content in User Dashboard</h1>
 @endsection

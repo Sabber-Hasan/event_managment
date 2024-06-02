@@ -1,875 +1,1516 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="author" content="Ashish S. Maharjan" />
+    <meta name="robots" content="index, follow" />
+    <meta
+      name="description"
+      content="adminAM - Bootstrap 5 Admin Template with Dashboard Demo"
+    />
+    <meta
+      name="keywords"
+      content="adminAM, Bootstrap 5.3.2, HTML, CSS, SASS, JavaScript, Admin template, Dashboard template"
+    />
+    <!-- for PWA -->
+    <meta name="theme-color" content="white" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Hello World App" />
+    <meta
+      name="msapplication-TileImage"
+      content="{{asset("static/img/favicons/android-chrome-192x192.png")}}"
+    />
+    <meta name="msapplication-TileColor" content="#FFFFFF" />
 
-<head>
-    <meta charset="utf-8" />
-    <title>{{ $title }}</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
-    <meta content="Coderthemes" name="author" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    {{-- "{{ asset() }}" --}}
-    <!-- App favicon -->
-    <link rel="shortcut icon" href="{{ asset('images/favicon.ico') }}">
-
+    <title>Admin-{{ $title }}</title>
+    <meta name="csrf-token" content="<?php echo csrf_token(); ?>" id="token">
     @yield('head')
-    <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}" type="text/css">
+    <!-- <meta http-equiv="refresh" content="5"/> -->
 
-    <!--Material Icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/materialdesignicons.min.css') }}" />
+    <!-- CSS -->
+    <link href="{{asset("static/css/bootstrap.min.css")}}" rel="stylesheet" />
+    <link href="{{asset("static/css/style.css")}}" rel="stylesheet" />
+    <link href="{{asset("assets/css/lightbox.min.css")}}" rel="stylesheet" />
 
-    <!--pe-7 Icon -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/pe-icon-7-stroke.css') }}" />
+    <!-- Favicons -->
+    <link
+      rel="apple-touch-icon"
+      href="{{asset("static/img/favicons/apple-touch-icon.png")}}"
+      sizes="120x120"
+    />
+    <link
+      rel="icon"
+      href="{{asset("static/img/favicons/favicon-32x32.png")}}"
+      sizes="32x32"
+      type="image/png"
+    />
+    <link
+      rel="icon"
+      href="{{asset("static/img/favicons/favicon-16x16.png")}}"
+      sizes="16x16"
+      type="image/png"
+    />
+    <link rel="icon" href="{{asset("static/img/favicons/favicon.ico")}}" />
 
-    <!-- Custom  sCss -->
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/style.css') }}" />
+    <!-- jvectormap -->
+    <link
+      rel="stylesheet"
+      href="{{asset("static/css/jquery-jvectormap-2.0.5.css")}}"
+      type="text/css"
+      media="screen"
+    />
 
-</head>
+    <!-- google sitemap -->
+    <meta
+      name="google-site-verification"
+      content="QI5mxFBO2xqf2NLOetb1-a68pb2gXVZpWgBnWKIN8RQ"
+    />
+  </head>
 
-<body data-bs-spy="scroll" data-bs-target=".navbar" data-bs-offset="58" class="scrollspy-example">
+  <body>
+    <div class="wrapper d-flex h-100">
+      <!-- #mainSidebar -->
 
-    <!--Navbar Start-->
-    <nav class="navbar navbar-expand-lg fixed-top navbar-custom sticky sticky-dark" id="nav-sticky">
-        <div class="container-fluid">
-            <!-- LOGO -->
-            <a class="logo text-uppercase" href="index.html">
-                <img src="{{ asset('images/logo-light.png') }}" alt="" class="logo-light" height="18" />
-                <img src="{{ asset('images/logo-dark.png') }}" alt="" class="logo-dark" height="18" />
-            </a>
+      <nav id="mainSidebar" class="h-100">
+        <div class="d-flex flex-column flex-shrink-0 p-3">
+          <!-- first a -->
+          <div
+            class="d-flex align-items-center justify-content-between mb-3 mb-md-0 me-md-auto w-100"
+          >
+            <!-- logo for LG screen -->
+            <span class="fs-4 logo-lg only-d-lg">
+              <a href="index.html">
+                <img src="{{asset("static/img/logo-100x25.png")}}" alt="" />
+              </a>
+            </span>
+            <!-- logo for SM screen -->
+            <span class="fs-4 logo-sm only-d-sm">
+              <img src="{{asset("static/img/logo-40x25.png")}}" alt="" />
+            </span>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
-                aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-                <i class="mdi mdi-menu"></i>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarCollapse">
-                <ul class="navbar-nav ms-auto" id="mySidenav">
-                    <li class="nav-item">
-                        <a href="#home" class="nav-link active">Home</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#features" class="nav-link">Features</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#services" class="nav-link">Services</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#demo" class="nav-link">Demos</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#clients" class="nav-link bg-success ">Switch to Merchant</a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#pricing" class="nav-link">Pricing</a>
-                    </li>
+            <!-- for SM screen - close -->
+            <span class="d-none" id="sidebarUntoggleBtn">
+              <i class="bi bi-x-circle-fill"></i>
+            </span>
+          </div>
+          <!-- first a ends -->
+          <hr />
+          <ul class="nav nav-pills flex-column mb-auto">
+            <!-- accounts -->
+            <p class="mt-2 mb-1 text-secondary text-small">User DASHBOARD</p>
+            <li class="nav-item">
+              <a href="{{route('home')}}" class="nav-link active" aria-current="page">
+                <i class="bi bi-house-door-fill me-2"></i>
+                Home v.1
+              </a>
+            </li>
+            <!-- todo -->
+            <li class="d-none">
+              <a href="index.html#" class="nav-link">
+                <i class="bi bi-marker-tip me-2"></i>
+                User Widgets
+              </a>
+            </li>
+            <!-- todo -->
+            <li class="d-none">
+              <a href="index.html#" class="nav-link">
+                <i class="bi bi-ui-checks-grid me-2"></i>
+                User Forms
+              </a>
+            </li>
+            <!-- products -->
+            <p class="mt-2 mb-1 text-secondary text-small">User PRODUCTS</p>
+            <li>
+              <a href="{{route('products.index')}}" class="nav-link">
+                <i class="bi bi-table me-2"></i>
+                Products
+              </a>
+            </li>
+            <li>
+              <a href="{{route('categories.index')}}" class="nav-link">
+                <i class="bi bi-bank me-2"></i>
+                Categories
+              </a>
+            </li>
+            <li>
+              <a href="{{route('subcategories.index')}}" class="nav-link">
+                <i class="bi bi-receipt me-2"></i>
+                Subcategories
+              </a>
+            </li>
+            <li>
+              <a href="{{url('todos')}}" class="nav-link">
+                <i class="bi bi-receipt me-2"></i>
+                Todos
+              </a>
+            </li>
 
-                    <li class="nav-item">
-                        <a href="#contact" class="nav-link">Contact</a>
-                    </li>
-                    <li class="dropdown notification-list topbar-dropdown">
-                        <a class="nav-link dropdown-toggle nav-user me-0 waves-effect waves-light"
-                            data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="false"
-                            aria-expanded="false">
-                            {{-- <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="user-image"
-                                class="rounded-circle"> --}}
-                            <span class="pro-user-name ms-1 bg-success">
-                                {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
-                            </span>
-                        </a>
-                        <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
-                            <!-- item-->
-                            <div class="dropdown-header noti-title">
-                                <h6 class="text-overflow m-0">Welcome !</h6>
-                            </div>
-    
-                            <!-- item-->
-                            <a href="contacts-profile.html" class="dropdown-item notify-item">
-                                
-                                <span>My Account</span>
-                            </a>
-    
-                            <!-- item-->
-                            <a href="auth-lock-screen.html" class="dropdown-item notify-item">
-                                
-                                <span>Lock Screen</span>
-                            </a>
-    
-                            
-    
-                            <!-- item-->
-                            {{-- <a href="" class="dropdown-item notify-item"> --}}
-                                
-                                <span>
-                                    <form method="POST" action="{{ route('logout') }}">
-                                        @csrf
-            
-                                        <x-dropdown-link :href="route('logout')"
-                                                onclick="event.preventDefault();
-                                                            this.closest('form').submit();">
-                                            {{ __('Log Out') }}
-                                        </x-dropdown-link>
-                                    </form>
-                                </span>
-                            {{-- </a> --}}
-    
-                        </div>
-                    </li>
-                    
-                </ul>
-            </div>
+            <!-- accounts -->
+            <p class="mt-2 mb-1 text-secondary text-small">ACCOUNTS</p>
+            <li>
+{{--               <a href="accounts/login/index.html" class="nav-link">
+                <i class="bi bi-box-arrow-right me-2"></i>
+                Sign in
+              </a> --}}
+              {{--  --}}
+              <form method="POST" action="{{ route('logout') }}">
+                @csrf
+                <a class="nav-link" href="#" onclick="event.preventDefault();this.closest('form').submit();">
+                    <i class="bi bi-box-arrow-right me-2"></i> Log Out</a>
+            </form>
+              {{--  --}}
+            </li>
+            <li>
+              <a href="{{route('profile.edit')}}" class="nav-link">
+                <i class="bi bi-person-circle me-2"></i>
+                My Profile
+              </a>
+            </li>
+            {{-- <li>
+              <a href="accounts/registration/index.html" class="nav-link">
+                <i class="bi bi-at me-2"></i>
+                Registration
+              </a>
+            </li> --}}
+            <!-- Theme -->
+            <p class="mt-2 mb-1 text-secondary text-small">THEME</p>
+            <li>
+              <a href="components/index.html" class="nav-link">
+                <i class="bi bi-file-font me-2"></i>
+                Components
+              </a>
+            </li>
+            <!-- others -->
+            <p class="mt-2 mb-1 text-secondary text-small">OTHERS</p>
+            <li>
+              <a href="404/index.html" class="nav-link">
+                <i class="bi bi-4-circle-fill me-2"></i>
+                404
+              </a>
+            </li>
+            <li>
+              <a href="blank-page/index.html" class="nav-link">
+                <i class="bi bi-file-earmark-fill me-2"></i>
+                Blank Page
+              </a>
+            </li>
+            <li>
+              <!-- "sys logs = timeline" -->
+              <a href="system-logs/index.html" class="nav-link">
+                <i class="bi bi-body-text me-2"></i>
+                Sys Logs
+              </a>
+            </li>
+            <li>
+              <a href="faq/index.html" class="nav-link">
+                <i class="bi bi-person-raised-hand me-2"></i>
+                FAQ
+              </a>
+            </li>
+            <li>
+              <a href="documentation/index.html" class="nav-link">
+                <i class="bi bi-file-earmark-text me-2"></i>
+                Documentation
+              </a>
+            </li>
+          </ul>
         </div>
-    </nav>
-    <!-- Navbar End -->
+      </nav>
+      <!-- #mainSidebar ends -->
 
-    <!-- home start -->
-    <section class="bg-home bg-gradient" id="home">
-        <div class="home-center">
-            <div class="home-desc-center">
-                <div class="container-fluid">
-                    <div class="row align-items-center">
-                        <div class="col-lg-6 col-sm-6">
-                            <div class="home-title">
-                                <h5 class="mb-3 text-white-50">Discover Adminto Today</h5>
-                                <h2 class="mb-4 text-white">Make your Site Amazing & Unique with Adminto</h2>
-                                <p class="text-white-50 home-desc font-16 mb-5">Adminto is a fully featured premium
-                                    Landing template built on top of awesome Bootstrap 4.3.1, modern web technology
-                                    HTML5, CSS3 and jQuery. </p>
-                                <div class="watch-video mt-5">
-                                    <a href="#" class="btn btn-custom me-4">Get Started <i
-                                            class="mdi mdi-chevron-right ms-1"></i></a>
-                                    <a href="http://vimeo.com/99025203" class="video-play-icon text-white"><i
-                                            class="mdi mdi-play play-icon-circle me-2"></i> <span>Watch The
-                                            Video</span></a>
-                                </div>
+      <!-- #pageContent -->
+      <div id="pageContent" class="d-flex flex-column">
+        <!-- topnav -->
 
-                            </div>
-                        </div>
-                        <div class="col-lg-5 offset-lg-1 col-sm-6">
-                            <div class="home-img mo-mt-20">
-                                <img src="{{ asset('images/home-img.png') }}" alt=""
-                                    class="img-fluid mx-auto d-block">
-                            </div>
-                        </div>
-                    </div>
-                    <!-- end row -->
+        <div id="topNavigation" class="px-3 py-2">
+          <div class="container-fluid">
+            <div class="d-flex justify-content-between align-items-center">
+              <!-- nav-left, breadcrumb -->
+              <a
+                href="index.html#"
+                class="nav-left d-flex align-items-center my-2 my-lg-0 me-lg-auto text-white text-decoration-none"
+              >
+                <i class="bi bi-list" id="sidebarToggleBtn"></i>
+              </a>
 
-                </div>
-                <!-- end container-fluid -->
-            </div>
-        </div>
-    </section>
-    <!-- home end -->
+              <div class="d-flex justify-content-end align-items-center">
+                <!-- search form -->
+                <form
+                  class="col-xl-4 col-md-auto col-lg-auto mb-0 me-xl-3"
+                  role="search"
+                >
+                  <div class="input-group">
+                    <input
+                      type="text"
+                      class="form-control"
+                      placeholder="search here"
+                    />
+                    <a class="btn" href="search-results/index.html">
+                      <i class="bi bi-search"></i>
+                    </a>
+                  </div>
+                </form>
 
-    <!-- features start -->
-    <section class="features" id="features">
-        <div class="container-fluid">
-            <div class="row">
-                <div class="col-lg-12">
-                    <ul class="nav nav-pills nav-justified features-tab mb-5" id="pills-tab" role="tablist">
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-code-tab" data-bs-toggle="pill" href="#pills-code"
-                                role="tab" aria-controls="pills-code" aria-selected="true">
-                                <div class="clearfix">
-                                    <div class="features-icon float-end">
-                                        <h1><i class="pe-7s-notebook tab-icon"></i></h1>
-                                    </div>
-                                    <div class="d-none d-lg-block me-4">
-                                        <h5 class="tab-title">Quality Code</h5>
-                                        <p>At vero eos et accusam et</p>
-                                    </div>
-                                </div>
-                            </a>
+                <!-- nav-right -->
+                <div class="nav-right col-md-auto col-lg-auto my-2">
+                  <!-- nav -->
+                  <ul class="nav">
+                    <!-- Home icon for sm screen -->
+                    <li class="only-d-sm">
+                      <a href="index.html" class="nav-link text-white">
+                        <i class="bi bi-house-door-fill"></i>
+                      </a>
+                    </li>
+
+                    <!-- Email -->
+                    <li>
+                      <a href="mail/index.html" class="nav-link text-white">
+                        <i class="bi bi-envelope">
+                          <span
+                            class="position-absolute top-0 start-100 translate-middle p-1 bg-info rounded-circle"
+                          >
+                            <span class="visually-hidden">New alerts</span>
+                          </span>
+                        </i>
+                      </a>
+                    </li>
+                    <!-- notification -->
+                    <li>
+                      <a
+                        href="index.html#"
+                        class="nav-link text-white"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <i class="bi bi-bell">
+                          <span
+                            class="position-absolute top-0 start-100 translate-middle p-1 bg-info rounded-circle"
+                          >
+                            <span class="visually-hidden">New alerts</span>
+                          </span>
+                        </i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                          <a class="dropdown-item" href="messenger/index.html">
+                            <small
+                              ><i class="bi bi-envelope me-2"></i>10 new
+                              messages</small
+                            >
+                          </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" id="pills-customize-tab" data-bs-toggle="pill"
-                                href="#pills-customize" role="tab" aria-controls="pills-customize"
-                                aria-selected="false">
-                                <div class="clearfix">
-                                    <div class="features-icon float-end">
-                                        <h1><i class="pe-7s-edit tab-icon"></i></h1>
-                                    </div>
-                                    <div class="d-none d-lg-block me-4">
-                                        <h5 class="tab-title">Easy to customize</h5>
-                                        <p>Sed ut unde iste error sit</p>
-                                    </div>
-                                </div>
-                            </a>
+                        <li>
+                          <a
+                            class="dropdown-item"
+                            href="single-page/index.html"
+                          >
+                            <small
+                              ><i class="bi bi-file-pdf me-2"></i>5 new
+                              reports</small
+                            >
+                          </a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" id="pills-support-tab" data-bs-toggle="pill" href="#pills-support"
-                                role="tab" aria-controls="pills-support" aria-selected="false">
-                                <div class="features-icon float-end">
-                                    <h1><i class="pe-7s-headphones tab-icon"></i></h1>
-                                </div>
-                                <div class="d-none d-lg-block me-4">
-                                    <h5 class="tab-title">Awesome Support</h5>
-                                    <p>It will be as simple as fact</p>
-                                </div>
-                            </a>
+                      </ul>
+                    </li>
+                    <!-- for profile page -->
+                    <li>
+                      <a
+                        href="index.html#"
+                        class="nav-link text-white"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                      >
+                        <i class="bi bi-person-circle"></i>
+                      </a>
+                      <ul class="dropdown-menu dropdown-menu-end">
+                        <li>
+                          <a class="dropdown-item" href="javascript:void(0)">
+                            <small>
+                              <i class="bi bi-person-fill me-2"></i>{{ Auth::user()->name }}
+                            </small>
+                          </a>
                         </li>
-                    </ul>
-                    @yield('content')
-                    <!-- end tab-content -->
-                </div>
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container-fluid -->
-    </section>
-    <!-- features end -->
-
-    <!-- services start -->
-    <section class="section bg-light" id="services">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="title text-center">
-                        <h6 class="text-primary small-title">Services</h6>
-                        <h4>What we do</h4>
-                        <p class="text-muted">At solmen va esser far uniform grammatica.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-xl-4 col-sm-6">
-                    <div class="services-box p-4 bg-white mt-4">
-                        <div class="services-img float-start me-4">
-                            <img src="{{ asset('images/icons/layers.png') }}" alt="">
-                        </div>
-                        <h5>Responsive Layouts</h5>
-                        <div class="overflow-hidden">
-                            <p class="text-muted">The new common language will be more simple and regular than the
-                                existing European languages.</p>
-                            <a href="#" class="text-custom">Read more...</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-sm-6">
-                    <div class="services-box p-4 bg-white mt-4">
-                        <div class="services-img float-start me-4">
-                            <img src="{{ asset('images/icons/core.png') }}" alt="">
-                        </div>
-                        <h5>Based on Bootstrap UI</h5>
-                        <div class="overflow-hidden">
-                            <p class="text-muted">If several languages coalesce the grammar language is more than that
-                                of indual languages.</p>
-                            <a href="#" class="text-custom">Read more...</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-sm-6">
-                    <div class="services-box p-4 bg-white mt-4">
-                        <div class="services-img float-start me-4">
-                            <img src="{{ asset('images/icons/paperdesk.png') }}" alt="">
-                        </div>
-                        <h5>Creative Design</h5>
-                        <div class="overflow-hidden">
-                            <p class="text-muted">It will be as simple as occidental it will be to an english person.
-                                It will be as simple as occidental</p>
-                            <a href="#" class="text-custom">Read more...</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-sm-6">
-                    <div class="services-box p-4 bg-white mt-4">
-                        <div class="services-img float-start me-4">
-                            <img src="{{ asset('images/icons/solarsystem.png') }}" alt="">
-                        </div>
-                        <h5>Awesome Support</h5>
-                        <div class="overflow-hidden">
-                            <p class="text-muted">Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis
-                                suscipit laboriosam nisi ut</p>
-                            <a href="#" class="text-custom">Read more...</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-sm-6">
-                    <div class="services-box p-4 bg-white mt-4">
-                        <div class="services-img float-start me-4">
-                            <img src="{{ asset('images/icons/datatext.png') }}" alt="">
-                        </div>
-                        <h5>Easy to customize</h5>
-                        <div class="overflow-hidden">
-                            <p class="text-muted">Everyone realizes why a new common language would be one could refuse
-                                to pay translators.</p>
-                            <a href="#" class="text-custom">Read more...</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xl-4 col-sm-6">
-                    <div class="services-box p-4 bg-white mt-4">
-                        <div class="services-img float-start me-4">
-                            <img src="{{ asset('images/icons/browserscript.png') }}" alt="">
-                        </div>
-                        <h5>Quality Code</h5>
-                        <div class="overflow-hidden">
-                            <p class="text-muted">At vero eos et accusamus et iusto odio dignissimos ducimus qui
-                                blanditiis deleniti atque</p>
-                            <a href="#" class="text-custom">Read more...</a>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container-fluid -->
-    </section>
-    <!-- services end -->
-
-    <!-- Demo start -->
-    <section class="section" id="demo">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="title text-center">
-                        <h6 class="text-primary small-title">Demos</h6>
-                        <h4>Available Demos</h4>
-                        <p class="text-muted">At solmen va esser far uniform grammatica.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-lg-4 col-sm-6">
-                    <div class="demo-box text-center p-3 mt-4">
-                        <a href="#" class="text-dark">
-                            <div class="position-relative demo-content">
-                                <div class="demo-img">
-                                    <img src="{{ asset('images/demo/demo-1.jpg') }}" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </div>
-                                <div class="demo-overlay">
-                                    <div class="overlay-icon">
-                                        <i class="pe-7s-expand1 h1 text-white"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <h5 class="font-18">Light Layouts</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="demo-box text-center p-3 mt-4">
-                        <a href="#" class="text-dark">
-                            <div class="position-relative demo-content">
-                                <div class="demo-img">
-                                    <img src="{{ asset('images/demo/demo-2.jpg') }}" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </div>
-                                <div class="demo-overlay">
-                                    <div class="overlay-icon">
-                                        <i class="pe-7s-expand1 h1 text-white"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <h5 class="font-18">Horizontal Layouts</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="demo-box text-center p-3 mt-4">
-                        <a href="#" class="text-dark">
-                            <div class="position-relative demo-content">
-                                <div class="demo-img">
-                                    <img src="{{ asset('images/demo/demo-3.jpg') }}" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </div>
-                                <div class="demo-overlay">
-                                    <div class="overlay-icon">
-                                        <i class="pe-7s-expand1 h1 text-white"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <h5 class="font-18">Semi Dark Layout</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="demo-box text-center p-3 mt-4">
-                        <a href="#" class="text-dark">
-                            <div class="position-relative demo-content">
-                                <div class="demo-img">
-                                    <img src="{{ asset('images/demo/demo-4.jpg') }}" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </div>
-                                <div class="demo-overlay">
-                                    <div class="overlay-icon">
-                                        <i class="pe-7s-expand1 h1 text-white"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <h5 class="font-18">Semi Dark Horizontal</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="demo-box text-center p-3 mt-4">
-                        <a href="#" class="text-dark">
-                            <div class="position-relative demo-content">
-                                <div class="demo-img">
-                                    <img src="{{ asset('images/demo/demo-5.jpg') }}" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </div>
-                                <div class="demo-overlay">
-                                    <div class="overlay-icon">
-                                        <i class="pe-7s-expand1 h1 text-white"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <h5 class="font-18">Landing Page</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <div class="col-lg-4 col-sm-6">
-                    <div class="demo-box text-center p-3 mt-4">
-                        <a href="#" class="text-dark">
-                            <div class="position-relative demo-content">
-                                <div class="demo-img">
-                                    <img src="{{ asset('images/demo/demo-6.jpg') }}" alt=""
-                                        class="img-fluid mx-auto d-block rounded">
-                                </div>
-                                <div class="demo-overlay">
-                                    <div class="overlay-icon">
-                                        <i class="pe-7s-expand1 h1 text-white"></i>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="mt-3">
-                                <h5 class="font-18">Dark Sidebar</h5>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
-            <div class="row">
-                <div class="col-12">
-                    <div class="text-center mt-4">
-                        <button class="btn btn-custom">More Demos <i class="mdi mdi-chevron-right"></i></button>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end container-fluid -->
-    </section>
-    <!-- Demo end -->
-
-    <!-- clients start -->
-    <section class="section bg-light" id="clients">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="title text-center mb-4">
-                        <h6 class="text-primary small-title">Clients</h6>
-                        <h4>What our Users Says</h4>
-                        <p class="text-muted">At solmen va esser far uniform grammatica.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="testi-box p-4 bg-white mt-4 text-center">
-                        <p class="text-muted mb-4">" The designer of this theme delivered a quality product. I am not a
-                            front-end developer and I hate when the theme I download has glitches or needs minor tweaks
-                            here and there. This worked for my needs just out of the boxes. Also, it is fast and
-                            elegant."</p>
-                        <div class="testi-img mb-4">
-                            <img src="{{ asset('images/testi/img-1.png') }}" alt=""
-                                class="rounded-circle img-thumbnail">
-                        </div>
-                        <p class="text-muted mb-1"> - Adminto User</p>
-                        <h5 class="font-18">Xpanta</h5>
-
-                        <div class="testi-icon">
-                            <i class="mdi mdi-format-quote-open display-2"></i>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testi-box p-4 bg-white mt-4 text-center">
-                        <p class="text-muted mb-4">" Extremely well designed and the documentation is very well done.
-                            Super happy with the purchase and definitely recommend this! "</p>
-                        <div class="testi-img mb-4">
-                            <img src="{{ asset('images/testi/img-2.png') }}" alt=""
-                                class="rounded-circle img-thumbnail">
-                        </div>
-                        <p class="text-muted mb-1"> - Adminto User</p>
-                        <h5 class="font-18">G_Sam</h5>
-
-                        <div class="testi-icon">
-                            <i class="mdi mdi-format-quote-open display-2"></i>
-                        </div>
-
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="testi-box p-4 bg-white mt-4 text-center">
-                        <p class="text-muted mb-4">" We used this theme to save some design time but... wow it has
-                            everything you didn't realize you would need later. I highly recommend this template to get
-                            your web design headed in the right direction quickly. "</p>
-                        <div class="testi-img mb-4">
-                            <img src="{{ asset('images/testi/img-3.png') }}" alt=""
-                                class="rounded-circle img-thumbnail">
-                        </div>
-                        <p class="text-muted mb-1"> - Adminto User</p>
-                        <h5 class="font-18">Isaacfab</h5>
-
-                        <div class="testi-icon">
-                            <i class="mdi mdi-format-quote-open display-2"></i>
-                        </div>
-
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
-
-            <div class="row mt-5 pt-5">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="client-images">
-                        <img src="{{ asset('images/clients/1.png') }}" alt="logo-img"
-                            class="mx-auto img-fluid d-block">
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="client-images">
-                        <img src="{{ asset('images/clients/2.png') }}" alt="logo-img"
-                            class="mx-auto img-fluid d-block">
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="client-images">
-                        <img src="{{ asset('images/clients/3.png') }}" alt="logo-img"
-                            class="mx-auto img-fluid d-block">
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="client-images">
-                        <img src="{{ asset('images/clients/4.png') }}" alt="logo-img"
-                            class="mx-auto img-fluid d-block">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- end container-fluid -->
-    </section>
-    <!-- clients end -->
-
-    <!-- counter start -->
-    <section class="section bg-gradient">
-        <div class="container-fluid">
-            <div class="row" id="counter">
-                <div class="col-lg-3 col-sm-6">
-                    <div class="text-center p-3">
-                        <div class="counter-icon text-white-50 mb-4">
-                            <i class="pe-7s-add-user display-4"></i>
-                        </div>
-                        <div class="counter-content">
-                            <h2 class="counter_value mb-3 text-white" data-target="1200">0</h2>
-                            <h5 class="counter-name text-white">Fans</h5>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-lg-3 col-sm-6">
-                    <div class="text-center p-3">
-                        <div class="counter-icon text-white-50 mb-4">
-                            <i class="pe-7s-cart display-4"></i>
-                        </div>
-                        <div class="counter-content">
-                            <h2 class="mb-3 text-white"><span class="counter_value" data-target="1500">10</span> +
-                            </h2>
-                            <h5 class="counter-name text-white">Total Sales</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="text-center p-3">
-                        <div class="counter-icon text-white-50 mb-4">
-                            <i class="pe-7s-smile display-4"></i>
-                        </div>
-                        <div class="counter-content">
-                            <h2 class="counter_value mb-3 text-white" data-target="6931">608</h2>
-                            <h5 class="counter-name text-white">Happy Clients</h5>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 col-sm-6">
-                    <div class="text-center p-3">
-                        <div class="counter-icon text-white-50 mb-4">
-                            <i class="pe-7s-medal display-4"></i>
-                        </div>
-                        <div class="counter-content">
-                            <h2 class="counter_value mb-3 text-white" data-target="800">2</h2>
-                            <h5 class="counter-name text-white">Won Prices</h5>
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-    <!-- counter end -->
-
-    <!-- pricing start -->
-    <section class="section bg-light" id="pricing">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="title text-center mb-4">
-                        <h6 class="text-primary small-title">Pricing</h6>
-                        <h4>Our Pricing plans</h4>
-                        <p class="text-muted">At solmen va esser far uniform grammatica.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="pricing-plans bg-white text-center p-4 mt-4">
-                        <h5 class="plan-title mt-2 mb-4">Single</h5>
-
-                        <div class="plan-price">
-                            <h4 class="mb-3 price"><sup><small>$</small></sup>24</h4>
-                            <h5 class="plan-duration text-muted font-18">Per license</h5>
-                        </div>
-
-                        <div class="pricing-content p-4 text-muted mb-2">
-                            <p>Number of end products 1</p>
-                            <p>Customer support</p>
-                            <p>Free Updates</p>
-                            <p>Monthly updates</p>
-                            <p>24 x 7 Support</p>
-                        </div>
-
-                        <div class="pt-4">
-                            <a href="#" class="btn btn-custom d-block">Purchase Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="pricing-plans bg-white text-center p-4 mt-4">
-                        <h5 class="plan-title mt-2 mb-4">Multiple</h5>
-
-                        <div class="plan-price">
-                            <h4 class="mb-3 price"><sup><small>$</small></sup>120</h4>
-                            <h5 class="plan-duration text-muted font-18">Per license</h5>
-                        </div>
-
-                        <div class="pricing-content p-4 text-muted mb-2">
-                            <p>Number of end products 1</p>
-                            <p>Customer support</p>
-                            <p>Free Updates</p>
-                            <p>Monthly updates</p>
-                            <p>24 x 7 Support</p>
-                        </div>
-
-                        <div class="pt-4">
-                            <a href="#" class="btn btn-custom d-block">Purchase Now</a>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-4">
-                    <div class="pricing-plans bg-white text-center p-4 mt-4">
-                        <h5 class="plan-title mt-2 mb-4">Extended</h5>
-
-                        <div class="plan-price">
-                            <h4 class="mb-3 price"><sup><small>$</small></sup>999</h4>
-                            <h5 class="plan-duration text-muted font-18">Per license</h5>
-                        </div>
-
-                        <div class="pricing-content p-4 text-muted mb-2">
-                            <p>Number of end products 1</p>
-                            <p>Customer support</p>
-                            <p>Free Updates</p>
-                            <p>Monthly updates</p>
-                            <p>24 x 7 Support</p>
-                        </div>
-
-                        <div class="pt-4">
-                            <a href="#" class="btn btn-custom d-block">Purchase Now</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
-        </div>
-        <!-- end container-fluid -->
-    </section>
-    <!-- pricing end -->
-
-    <!-- contact start -->
-    <section class="section" id="contact">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-lg-6">
-                    <div class="title text-center mb-5">
-                        <h6 class="text-primary small-title">Contact</h6>
-                        <h4>Have any Questions ?</h4>
-                        <p class="text-muted">At solmen va esser far uniform grammatica.</p>
-                    </div>
-                </div>
-            </div>
-            <!-- end row -->
-
-            <div class="row">
-                <div class="col-lg-4">
-                    <div class="get-in-touch">
-                        <h5>Get in touch</h5>
-                        <p class="text-muted mb-5">At solmen va esser necessi far</p>
-
-                        <div class="mb-3">
-                            <div class="get-touch-icon float-start me-3">
-                                <h2><i class="pe-7s-mail text-primary"></i></h2>
-                            </div>
-                            <div class="overflow-hidden">
-                                <h5 class="font-16 mb-0">E-mail</h5>
-                                <p class="text-muted">example@abc.com</p>
-                            </div>
-                        </div>
-                        <div class="mb-3">
-                            <div class="get-touch-icon float-start me-3">
-                                <h2><i class="pe-7s-phone text-primary"></i></h2>
-                            </div>
-                            <div class="overflow-hidden">
-                                <h5 class="font-16 mb-0">Phone</h5>
-                                <p class="text-muted">012-345-6789</p>
-                            </div>
-                        </div>
-                        <div class="mb-2">
-                            <div class="get-touch-icon float-start me-3">
-                                <h2> <i class="pe-7s-map-marker text-primary"></i></h2>
-                            </div>
-                            <div class="overflow-hidden">
-                                <h5 class="font-16 mb-0">Address</h5>
-                                <p class="text-muted">20 Rollins Road Cotesfield, NE 68829</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-8">
-                    <div class="custom-form bg-white">
-                        <span id="error-msg"></span>
-                        <form method="post" name="myForm" onsubmit="return validateForm()">
-                            <div class="row">
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="name" class="form-label">Name</label>
-                                        <input name="name" id="name" type="text" class="form-control"
-                                            placeholder="Enter your name...">
-                                    </div>
-                                </div>
-                                <div class="col-lg-6">
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">Email address</label>
-                                        <input name="email" id="email" type="email" class="form-control"
-                                            placeholder="Enter your email...">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end row -->
-
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="mb-3">
-                                        <label for="subject" class="form-label">Subject</label>
-                                        <input name="subject" id="subject" type="text" class="form-control"
-                                            placeholder="Enter Subject...">
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end row -->
-
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="mb-3">
-                                        <label for="comments" class="form-label">Message</label>
-                                        <textarea name="comments" id="comments" rows="4" class="form-control" placeholder="Enter your message..."></textarea>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- end row -->
-
-                            <div class="row">
-                                <div class="col-lg-12 text-end">
-                                    <input type="submit" id="submit" name="send"
-                                        class="submitBnt btn btn-custom" value="Send Message" />
-                                </div>
-                            </div>
-                            <!-- end row -->
+                        <li>
+                          <a class="dropdown-item" href="{{route('profile.edit')}}">
+                            <small>
+                              <i class="bi bi-person-fill me-2"></i>My Profile
+                            </small>
+                          </a>
+                        </li>
+                        <li>
+                          <a
+                            class="dropdown-item"
+                            href="system-logs/index.html"
+                          >
+                            <small>
+                              <i class="bi bi-body-text me-2"></i>Acitivity Log
+                            </small>
+                          </a>
+                        </li>
+                        <li>
+                          <a class="dropdown-item" href="profile/index.html">
+                            <small>
+                              <i class="bi bi-gear-fill me-2"></i>Settings
+                            </small>
+                          </a>
+                        </li>
+                        <!-- <hr class="my-1"> -->
+                        <div class="divider my-1"></div>
+                        {{-- <li>
+                          <a
+                            class="dropdown-item"
+                            href="accounts/login/index.html"
+                          >
+                            <small>
+                              <i class="bi bi-box-arrow-right me-2"></i>Sign out
+                            </small>
+                          </a>
+                        </li> --}}
+                        <li>
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <a class="dropdown-item" href="#" onclick="event.preventDefault();this.closest('form').submit();">
+                                <small>
+                                    <i class="bi bi-box-arrow-right me-2"></i>Log Out
+                                </small>
+                            </a>
                         </form>
-                    </div>
-                    <!-- end custom-form -->
-
+                    </li>
+                      </ul>
+                    </li>
+                    <!-- for modal applications -->
+                    <li>
+                      <a
+                        href="index.html#"
+                        class="nav-link text-white"
+                        data-bs-toggle="modal"
+                        data-bs-target="#modalApplication"
+                      >
+                        <i class="bi bi-boxes"></i>
+                      </a>
+                    </li>
+                  </ul>
                 </div>
+              </div>
             </div>
-            <!-- end row -->
+          </div>
         </div>
-        <!-- end container-fluid -->
-    </section>
-    <!-- contact end -->
+        <!-- topnav ends -->
 
-    <!-- footer start -->
-    <footer class="footer bg-dark">
-        <div class="container-fluid">
+        <div class="container-fluid px-4">
+          <!-- section searchForMobile -->
+          <div class="row my-4 sm-my-3 sm-mt-0" id="searchForMobile">
+            <div class="col">
+              <form>
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control form-control-dark text-bg-dark text-white"
+                    value="search here"
+                  />
+                  <a class="btn" href="search-results/index.html">
+                    <i class="bi bi-search"></i>
+                  </a>
+                </div>
+              </form>
+            </div>
+          </div>
+          <!-- section searchForMobile ends -->
+
+          <!-- main_content -->
+
+          <!-- page title -->
+          <div class="pageTitle pt-3 pb-3 md-pt-0">
+            <h3 class="md-mb-0">{{$title}}</h3>
+            {{-- <div class="btn-toolbar mb-2">
+              <div class="btn-group me-2">
+                <button
+                  id="generateReport"
+                  type="button"
+                  class="btn btn-sm btn-outline-secondary"
+                  data-bs-toggle="modal"
+                  data-bs-target="#modalGenerateReport"
+                >
+                  Report
+                </button>
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  Export
+                </button>
+              </div>
+              <button
+                type="button"
+                class="btn btn-sm btn-outline-secondary dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <span data-feather="calendar"></span>
+                More options
+              </button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="index.html#">
+                    <small>
+                      <i class="bi bi-1-square me-2"></i>
+                      Option one
+                    </small>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="index.html#">
+                    <small>
+                      <i class="bi bi-2-square me-2"></i>
+                      Option two
+                    </small>
+                  </a>
+                </li>
+              </ul>
+            </div> --}}
+          </div>
+          <!-- page title ends -->
+<div class="row mt-4 sm-mt-0">
+  
+{{-- flash message --}}
+@include('inc.flash')
+{{-- flash message end --}}
+{{-- flash message --}}
+@include('inc.error')
+{{-- flash message end --}}
+    @yield('content')
+</div>
+          
+
+          <!-- row for cardQuickInfo -->
+          {{-- <div class="row mt-4 sm-mt-3" id="sectionDashboardQuickInfo">
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 sm-mb-3">
+              <div class="card cardQuickInfo">
+                <div class="card-body">
+                  <div>
+                    <h3>$ 200K</h3>
+                    <p>Total earnings</p>
+                  </div>
+                  <div>
+                    <i class="bi bi-currency-dollar"></i>
+                  </div>
+                </div>
+                <div class="card-footer text-center">
+                  <a href="sales/index.html"
+                    >Read more <i class="bi bi-arrow-right-circle"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 sm-mb-3">
+              <div class="card cardQuickInfo">
+                <div class="card-body">
+                  <div>
+                    <h3>29%</h3>
+                    <p>Total bounce rate</p>
+                  </div>
+                  <div>
+                    <i class="bi bi-globe-americas"></i>
+                  </div>
+                </div>
+                <div class="card-footer text-center">
+                  <a href="single-page/index.html"
+                    >Read more <i class="bi bi-arrow-right-circle"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 sm-mb-3">
+              <div class="card cardQuickInfo">
+                <div class="card-body">
+                  <div>
+                    <h3>499</h3>
+                    <p>New users registration</p>
+                  </div>
+                  <div>
+                    <i class="bi bi-person-fill-add"></i>
+                  </div>
+                </div>
+                <div class="card-footer text-center">
+                  <a href="single-page/index.html"
+                    >Read more <i class="bi bi-arrow-right-circle"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-lg-3 col-xl-3 sm-mb-3">
+              <div class="card cardQuickInfo">
+                <div class="card-body">
+                  <div>
+                    <h3>$ 10.5k</h3>
+                    <p>Yearly expense report</p>
+                  </div>
+                  <div>
+                    <i class="bi bi-receipt"></i>
+                  </div>
+                </div>
+                <div class="card-footer text-center">
+                  <a href="expenses/index.html"
+                    >Read more <i class="bi bi-arrow-right-circle"></i
+                  ></a>
+                </div>
+              </div>
+            </div>
+          </div> --}}
+          <!-- row for cardQuickInfo ends -->
+
+          {{-- <div class="row mt-4 sm-mt-0">
+            <div class="col-lg-8">
+              <!-- purhcase_sales_history -->
+              <div class="card sm-mb-3">
+                <div class="card-body">
+                  <h6 class="card-title">Purchase & Sales History</h6>
+                  <canvas
+                    id="lineChartExampleOne"
+                    style="height: 350px; width: 100%"
+                  ></canvas>
+                </div>
+              </div>
+              <!-- purhcase_sales_history ends -->
+
+              <!-- internal_projects -->
+              <div class="card mt-4 sm-mt-0">
+                <div class="card-header py-3">
+                  <h6 class="m-0">Internal Projects</h6>
+                </div>
+                <div class="card-body">
+                  <p class="small d-flex justify-content-between">
+                    Social Media Marketing <span class="float-right">80%</span>
+                  </p>
+                  <div class="progress mb-4">
+                    <div
+                      class="progress-bar bg-success"
+                      role="progressbar"
+                      style="width: 80%"
+                    ></div>
+                  </div>
+
+                  <p class="small d-flex justify-content-between">
+                    AWS migration <span class="float-right">20%</span>
+                  </p>
+                  <div class="progress mb-4">
+                    <div
+                      class="progress-bar bg-danger"
+                      role="progressbar"
+                      style="width: 20%"
+                    ></div>
+                  </div>
+
+                  <p class="small d-flex justify-content-between">
+                    Payment Gateway Asia <span class="float-right">60%</span>
+                  </p>
+                  <div class="progress mb-4">
+                    <div
+                      class="progress-bar bg-warning"
+                      role="progressbar"
+                      style="width: 60%"
+                    ></div>
+                  </div>
+
+                  <p class="small d-flex justify-content-between">
+                    DE Warehouse Setup <span class="float-right">90%</span>
+                  </p>
+                  <div class="progress mb-4">
+                    <div
+                      class="progress-bar bg-success"
+                      role="progressbar"
+                      style="width: 90%"
+                    ></div>
+                  </div>
+
+                  <p class="small d-flex justify-content-between">
+                    SAP-ERP System <span class="float-right">5%</span>
+                  </p>
+                  <div class="progress mb-4">
+                    <div
+                      class="progress-bar bg-danger"
+                      role="progressbar"
+                      style="width: 5%"
+                    ></div>
+                  </div>
+                </div>
+              </div>
+              <!-- internal_projects ends -->
+
+              <!-- user_demographics -->
+              <div class="card mt-4 sm-mt-3">
+                <div class="card-header py-3">
+                  <h6 class="m-0">User Demographics</h6>
+                </div>
+                <div class="card-body p-0">
+                  <div id="world-map" style="width: 100%; height: 400px"></div>
+                </div>
+              </div>
+              <!-- user_demographics ends -->
+            </div>
+
+            <div class="col-lg-4 col-sm-12 col-xs-12">
+              <!-- visitors' browser -->
+              <div class="card sm-mt-3">
+                <div class="card-body">
+                  <h6 class="card-title">Visitors' Browser</h6>
+                  <div class="d-flex justify-content-center">
+                    <canvas
+                      id="visitorBrowser"
+                      style="height: 300; width: 300"
+                    ></canvas>
+                  </div>
+                  <!-- table  -->
+                  <table class="table table-responsive mt-4">
+                    <tr>
+                      <td>
+                        <i
+                          class="bi bi-circle-fill bg-dark me-2"
+                          style="color: #dc3545"
+                        ></i>
+                        Safari
+                      </td>
+                      <td>10%</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <i
+                          class="bi bi-circle-fill bg-dark me-2"
+                          style="color: #ffda6a"
+                        ></i>
+                        Chrome
+                      </td>
+                      <td>21%</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <i
+                          class="bi bi-circle-fill bg-dark me-2"
+                          style="color: #20c997"
+                        ></i>
+                        IE
+                      </td>
+                      <td>19%</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <i
+                          class="bi bi-circle-fill bg-dark me-2"
+                          style="color: #6f42c1"
+                        ></i>
+                        Opera
+                      </td>
+                      <td>5%</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <i
+                          class="bi bi-circle-fill bg-dark me-2"
+                          style="color: #fd7e14"
+                        ></i>
+                        Firefox
+                      </td>
+                      <td>42%</td>
+                    </tr>
+
+                    <tr>
+                      <td>
+                        <i
+                          class="bi bi-circle-fill bg-dark me-2"
+                          style="color: #6610f2"
+                        ></i>
+                        Others
+                      </td>
+                      <td>3%</td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
+              <!-- visitors' browser ends -->
+
+              <!-- recently added products -->
+
+              <div class="card mt-4 sm-mt-3">
+                <div class="card-body">
+                  <h6 class="card-title">Recently added products</h6>
+
+                  <div class="media">
+                    <img
+                      src="static/img/products/P001.png"
+                      height="50px"
+                      width="50px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        Smartphone X
+                        <span>$149.99</span>
+                      </h6>
+                      <p>High-performance smartphone.</p>
+                    </div>
+                  </div>
+
+                  <div class="media">
+                    <img
+                      src="static/img/products/P005.png"
+                      height="50px"
+                      width="50px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        Digital Camera
+                        <span>$79.99</span>
+                      </h6>
+                      <p>
+                        Capture moments with high-resolution digital imaging.
+                      </p>
+                    </div>
+                  </div>
+
+                  <div class="media">
+                    <img
+                      src="static/img/products/P003.png"
+                      height="50px"
+                      width="50px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        Fitness Tracker
+                        <span>$1599.99</span>
+                      </h6>
+                      <p>Track your fitness activities.</p>
+                    </div>
+                  </div>
+
+                  <div class="media">
+                    <img
+                      src="static/img/products/P009.png"
+                      height="50px"
+                      width="50px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        Smart Light Bulbs
+                        <span>$49.99</span>
+                      </h6>
+                      <p>Adjustable lighting with smart connectivity.</p>
+                    </div>
+                  </div>
+
+                  <div class="media">
+                    <img
+                      src="static/img/products/P002.png"
+                      height="50px"
+                      width="50px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        Laptop Pro
+                        <span>$129.99</span>
+                      </h6>
+                      <p>Powerful laptop for professional use.</p>
+                    </div>
+                  </div>
+
+                  <div class="media">
+                    <img
+                      src="static/img/products/P004.png"
+                      height="50px"
+                      width="50px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        Wireless Headphones
+                        <span>$199.99</span>
+                      </h6>
+                      <p>With immersive audio experience.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- recently added products ends -->
+            </div>
+          </div> --}}
+
+          <!-- For messenger, and order status -->
+          {{-- <div class="row">
+            <div class="col-lg-3">
+              <div class="card mt-4 sm-mt-3">
+                <div class="card-body">
+                  <h6
+                    class="card-title d-flex justify-content-between align-items-center"
+                  >
+                    Messages
+                    <small>
+                      <a href="messenger/index.html" class="amj-a">Read all</a>
+                    </small>
+                  </h6>
+
+                  <div class="media py-2 my-2">
+                    <img
+                      src="static/img/profile/profile-1.jpg"
+                      class="rounded-circle me-3"
+                      height="45px"
+                      width="45px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        John Doe
+                        <span>Jan. 1, 2024</span>
+                      </h6>
+                      <p>Hello, how are you doing today?</p>
+                    </div>
+                  </div>
+                  <div class="divider"></div>
+
+                  <div class="media py-2 my-2">
+                    <img
+                      src="static/img/profile/profile-2.jpg"
+                      class="rounded-circle me-3"
+                      height="45px"
+                      width="45px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        Alice Smith
+                        <span>Feb. 15, 2024</span>
+                      </h6>
+                      <p>Sending a quick update on our project.</p>
+                    </div>
+                  </div>
+                  <div class="divider"></div>
+
+                  <div class="media py-2 my-2">
+                    <img
+                      src="static/img/profile/profile-3.jpg"
+                      class="rounded-circle me-3"
+                      height="45px"
+                      width="45px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        Bob Johnson
+                        <span>Mar. 10, 2024</span>
+                      </h6>
+                      <p>Friendly reminder about our upcoming meeting.</p>
+                    </div>
+                  </div>
+                  <div class="divider"></div>
+
+                  <div class="media py-2 my-2">
+                    <img
+                      src="static/img/profile/profile-4.jpg"
+                      class="rounded-circle me-3"
+                      height="45px"
+                      width="45px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        Eva Williams
+                        <span>Apr. 5, 2024</span>
+                      </h6>
+                      <p>Wishing you a fantastic and joyful birthday!</p>
+                    </div>
+                  </div>
+                  <div class="divider"></div>
+
+                  <div class="media py-2 my-2">
+                    <img
+                      src="static/img/profile/profile-5.jpg"
+                      class="rounded-circle me-3"
+                      height="45px"
+                      width="45px"
+                      alt=""
+                    />
+                    <div class="media-body">
+                      <h6 class="mt-0">
+                        Jane Doe
+                        <span>May 20, 2024</span>
+                      </h6>
+                      <p>Just wanted to say a quick hello!</p>
+                    </div>
+                  </div>
+                  <div class="divider"></div>
+                </div>
+              </div>
+            </div>
+            <div class="col-lg-9">
+              <div class="card mt-4 sm-mt-3">
+                <div class="card-body table-responsive">
+                  <h6 class="card-title">Order Status</h6>
+                  <div class="table-responsive">
+                    <table class="table overflow-scroll table-hover">
+                      <thead>
+                        <tr>
+                          <th></th>
+                          <th>Client</th>
+                          <th>Order no</th>
+                          <th>Product</th>
+                          <th>Selling price</th>
+                          <th>Payment mode</th>
+                          <th>Date</th>
+                          <th>Payment status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr>
+                          <td>
+                            <input class="form-check-input" type="checkbox" />
+                          </td>
+                          <td class="d-flex align-items-center">
+                            <span class="nameInitial">JD</span>&nbsp;&nbsp;John
+                            Doe
+                          </td>
+                          <td>ORD123456</td>
+                          <td>Example Product</td>
+                          <td>49.99</td>
+                          <td>Credit Card</td>
+                          <td>2023-01-01</td>
+                          <td>
+                            <div class="badge badge-outline-success">
+                              Approved
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <input class="form-check-input" type="checkbox" />
+                          </td>
+                          <td class="d-flex align-items-center">
+                            <span class="nameInitial">JS</span>&nbsp;&nbsp;Jane
+                            Smith
+                          </td>
+                          <td>ORD789012</td>
+                          <td>Another Product</td>
+                          <td>29.99</td>
+                          <td>PayPal</td>
+                          <td>2023-02-15</td>
+                          <td>
+                            <div class="badge badge-outline-danger">Failed</div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <input class="form-check-input" type="checkbox" />
+                          </td>
+                          <td class="d-flex align-items-center">
+                            <span class="nameInitial">BJ</span>&nbsp;&nbsp;Bob
+                            Johnson
+                          </td>
+                          <td>ORD345678</td>
+                          <td>Special Item</td>
+                          <td>99.99</td>
+                          <td>Debit Card</td>
+                          <td>2023-03-20</td>
+                          <td>
+                            <div class="badge badge-outline-success">
+                              Approved
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <input class="form-check-input" type="checkbox" />
+                          </td>
+                          <td class="d-flex align-items-center">
+                            <span class="nameInitial">AB</span>&nbsp;&nbsp;Alice
+                            Brown
+                          </td>
+                          <td>ORD901234</td>
+                          <td>Unique Product</td>
+                          <td>59.99</td>
+                          <td>Bank Transfer</td>
+                          <td>2023-04-10</td>
+                          <td>
+                            <div class="badge badge-outline-warning">
+                              Pending
+                            </div>
+                          </td>
+                        </tr>
+
+                        <tr>
+                          <td>
+                            <input class="form-check-input" type="checkbox" />
+                          </td>
+                          <td class="d-flex align-items-center">
+                            <span class="nameInitial">CG</span
+                            >&nbsp;&nbsp;Charlie Green
+                          </td>
+                          <td>ORD567890</td>
+                          <td>Special Edition</td>
+                          <td>79.99</td>
+                          <td>Credit Card</td>
+                          <td>2023-05-25</td>
+                          <td>
+                            <div class="badge badge-outline-success">
+                              Approved
+                            </div>
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div> --}}
+
+          <!-- main_content ends -->
+        </div>
+
+        <!-- footer -->
+        <!-- divider for footer -->
+        <div class="mt-4 sm-mt-3"></div>
+        <!-- divider for footer ends -->
+        {{-- <footer class="py-3 mt-auto container-fluid">
+          <div class="row">
+            <div class="col text-small">
+              <span class="mb-3 mb-md-0">© Your Company | 2024</span>
+            </div>
+            <div class="col text-small text-end">
+              <span class="mb-3 mb-md-0">
+                Designed by
+                <a
+                  href="https://github.com/asis2016/bootstrap-5-admin-template"
+                >
+                  <span class="only-d-lg"
+                    >adminAM - Bootstrap 5 Admin Template</span
+                  >
+                  <span class="only-d-sm">adminAM</span>
+                </a>
+              </span>
+            </div>
+          </div>
+        </footer> --}}
+        <x-footer message="12345678">
+          <h1>testing our footer</h1>
+          <marquee behavior="" direction=""> 1 3 5 7</marquee>
+        </x-footer>
+        <!-- footer ends -->
+      </div>
+      <!-- #pageContent ends -->
+    </div>
+
+    <!-- modal for application -->
+    <div class="modal" id="modalApplication" tabindex="-1">
+      <div class="modal-dialog modal-dialog-centered modal-xl">
+        <div class="modal-content">
+          <!-- Modal Header -->
+          <div class="modal-header">
+            <h6 class="modal-title">All Applications</h6>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <!-- Modal body for lg screen -->
+          <div class="modal-body sm-d-none modal-body-lg">
             <div class="row">
-                <div class="col-xl-12">
-                    <div class="text-center">
-                        <div class="footer-logo mb-3">
-                            <img src="{{ asset('images/logo-light.png') }}" alt="" height="20">
-                        </div>
-                        <ul class="list-inline footer-list text-center mt-5">
-                            <li class="list-inline-item"><a href="#">Home</a></li>
-                            <li class="list-inline-item"><a href="#">About</a></li>
-                            <li class="list-inline-item"><a href="#">Services</a></li>
-                            <li class="list-inline-item"><a href="#">Clients</a></li>
-                            <li class="list-inline-item"><a href="#">Pricing</a></li>
-                            <li class="list-inline-item"><a href="#">Contact</a></li>
-                        </ul>
-                        <ul class="list-inline social-links mb-4 mt-5">
-                            <li class="list-inline-item"><a href="#"><i class="mdi mdi-facebook"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="mdi mdi-twitter"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="mdi mdi-instagram"></i></a></li>
-                            <li class="list-inline-item"><a href="#"><i class="mdi mdi-google-plus"></i></a>
-                            </li>
-                        </ul>
-                        <p class="text-white-50 mb-4">2016 - 2020 © Adminto. Design by <a href="#"
-                                target="_blank" class="text-white-50">Coderthemes</a> </p>
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-cart-plus"></i>
+                  <p class="py-2 mb-0">Addon Domains</p>
+                </a>
+              </div>
 
-                    </div>
-                </div>
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-door-open"></i>
+                  <p class="py-2 mb-0">Authentication</p>
+                </a>
+              </div>
 
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-copy"></i>
+                  <p class="py-2 mb-0">Backup Wizard</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-calendar3"></i>
+                  <p class="py-2 mb-0">Calendar</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-person-lines-fill"></i>
+                  <p class="py-2 mb-0">Contact</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-database"></i>
+                  <p class="py-2 mb-0">DBMS</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-diagram-3"></i>
+                  <p class="py-2 mb-0">Diagram</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-folder"></i>
+                  <p class="py-2 mb-0">Directory Privacy</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-envelope-at-fill"></i>
+                  <p class="py-2 mb-0">Email Accounts</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-key-fill"></i>
+                  <p class="py-2 mb-0">Encryption</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-file-earmark-binary"></i>
+                  <p class="py-2 mb-0">File Manager</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-images"></i>
+                  <p class="py-2 mb-0">Gallery</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-question-circle"></i>
+                  <p class="py-2 mb-0">Help</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-mailbox"></i>
+                  <p class="py-2 mb-0">Mailing Lists</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-geo-fill"></i>
+                  <p class="py-2 mb-0">Maps</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-person-badge"></i>
+                  <p class="py-2 mb-0">Profile</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-box-arrow-up-left"></i>
+                  <p class="py-2 mb-0">Redirects</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-gear-wide-connected"></i>
+                  <p class="py-2 mb-0">Settings</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-globe"></i>
+                  <p class="py-2 mb-0">Subdomains</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-display"></i>
+                  <p class="py-2 mb-0">System Monitor</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-bar-chart-line"></i>
+                  <p class="py-2 mb-0">System Settings</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-people"></i>
+                  <p class="py-2 mb-0">Management</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-braces-asterisk"></i>
+                  <p class="py-2 mb-0">WYSIWYG</p>
+                </a>
+              </div>
+
+              <div class="col-lg-2 text-center p-4">
+                <a href="single-page/index.html" class="box">
+                  <i class="bi bi-book"></i>
+                  <p class="py-2 mb-0">Zone Editor</p>
+                </a>
+              </div>
             </div>
+          </div>
+          <!-- Modal body for lg screen ends -->
+          <!-- todo -->
+          <div class="modal-body modal-body-sm">
+            <ul class="list-group">
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-cart-plus"></i>
+                  Addon Domains
+                </a>
+              </li>
 
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-door-open"></i>
+                  Authentication
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-copy"></i>
+                  Backup Wizard
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-calendar3"></i>
+                  Calendar
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-person-lines-fill"></i>
+                  Contact
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-database"></i>
+                  DBMS
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-diagram-3"></i>
+                  Diagram
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-folder"></i>
+                  Directory Privacy
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-envelope-at-fill"></i>
+                  Email Accounts
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-key-fill"></i>
+                  Encryption
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-file-earmark-binary"></i>
+                  File Manager
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-images"></i>
+                  Gallery
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-question-circle"></i>
+                  Help
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-mailbox"></i>
+                  Mailing Lists
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-geo-fill"></i>
+                  Maps
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-person-badge"></i>
+                  Profile
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-box-arrow-up-left"></i>
+                  Redirects
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-gear-wide-connected"></i>
+                  Settings
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-globe"></i>
+                  Subdomains
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-display"></i>
+                  System Monitor
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-bar-chart-line"></i>
+                  System Settings
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-people"></i>
+                  Management
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-braces-asterisk"></i>
+                  WYSIWYG
+                </a>
+              </li>
+
+              <li class="list-group-item">
+                <a href="index.html#" class="amj-a">
+                  <i class="bi bi-book"></i>
+                  Zone Editor
+                </a>
+              </li>
+            </ul>
+          </div>
         </div>
-    </footer>
-    <!-- footer end -->
+      </div>
+    </div>
+    <!-- modal for application ends -->
 
-    <!-- Back to top -->
-    <a href="#" class="back-to-top" id="back-to-top"> <i class="mdi mdi-chevron-up"> </i> </a>
+    <!-- modal for generate report -->
+    <div class="modal" id="modalGenerateReport" tabindex="-1">
+      <div
+        class="d-flex flex-column justify-content-center align-items-center modal-dialog modal-dialog-centered modal-xl text-center"
+      >
+        <div
+          class="spinner-grow text-danger"
+          style="width: 4rem; height: 4rem"
+          role="status"
+        >
+          <span class="sr-only"></span>
+        </div>
+        <p class="mb-0 mt-4 sm-mt-3">Generating report...</p>
+        <p>Just a demo, skip by pressing anywhere.</p>
+      </div>
+    </div>
+    <!-- modal for generate report ends -->
 
-    <!-- javascript -->
-    <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
-    <!-- counter js -->
-    <script src="{{ asset('js/counter.int.js') }}"></script>
-    <!-- custom js -->
-    <script src="{{ asset('js/app.js') }}"></script>
-</body>
+    <!-- jquery -->
+    <script src="{{asset("assets/js/jquery-3.7.1.min.js")}}"></script>
+    <!-- bootstrap.bundle.min.js -->
+    <script src="{{asset("assets/js/bootstrap.bundle.min.js")}}"></script>
+    {{-- lightbox js --}}
+    <script src="{{asset("assets/js/lightbox.min.js")}}"></script>
+    {{-- sweet alert --}}
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- chartjs -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- jvectormap -->
+    {{-- <script src="{{asset("static/js/jquery-jvectormap-2.0.5.min.js")}}"></script> --}}
+    {{-- <script src="{{asset("static/js/jquery-jvectormap-world-mill-en.js")}}"></script> --}}
+    <!-- ploty -->
+    {{-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> --}}
+    <!-- script.js -->
+    <script src="{{asset("static/js/script.js")}}"></script>
 
+    {{-- <script src="{{asset("static/js/dashboard.js")}}"></script> --}}
+    {{-- <script src="{{asset("static/js/user-demographics.js")}}"></script> --}}
+    @yield('script')
+  </body>
 </html>
