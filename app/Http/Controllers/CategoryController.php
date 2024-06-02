@@ -4,97 +4,106 @@ namespace App\Http\Controllers;
 
 use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Facades\Image;
+use Intervention\Image\ImageManager;
+use Intervention\Image\Drivers\Gd\Driver;
 
 class CategoryController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display a listing of the categories.
      */
     public function index()
     {
-        $categories = Category::with('subcategories')->paginate(config('global.paginate'));
-        return view('categories.index', compact('categories'));
-        // return view('categories.index', ['categories' => $categories]);
-        // return view('categories.index')->with('categories', $categories);
+        $categories = Category::all();
+        return view('admin.categories.index', compact('categories'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new category.
      */
     public function create()
     {
-        return view ("categories.create");
+        return view('admin.categories.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created category in the database.
      */
+
+
+
     public function store(Request $request)
     {
-        //https://laravel.com/docs/11.x/validation#available-validation-rules
-        
-        $validated = $request->validate([
-            'name' => 'required|unique:categories|max:255',
-            'slug'=>'required|unique:categories|max:255',
-            'description' => 'required',
-            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'status' => 'required',
+        $category = Category::create($request->all());
+
+        if ($category) {
+            if ($request->hasFile('image')) {
+                $file = $request->file('image');
+                $loc = $file->store('public/' . 'categories');
+                $category->image = str_replace('public/', '', $loc);
+                $category->save();
+
+                $manager = new ImageManager(new Driver());
+                $image = $manager->read(Storage::path($loc));
+                $image = $image->scaleDown(width: 300)->place(storage_path("app/public"))->save(Storage::path($loc));
+            }
+
+            return redirect()->route("admin.categories.index")->with("success", "Category created successfully.");
+        } else {
+            echo "Category creation failed";
+        }
+    }
+    private function isImage($file)
+{
+    $mime = $file->getMimeType();
+    return in_array($mime, ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/svg+xml']);
+}
+    /**
+     * Display the specified category.
+     */
+    public function show($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('admin.categories.show', compact('category'));
+    }
+
+    /**
+     * Show the form for editing the specified category.
+     */
+    public function edit($id)
+    {
+        $category = Category::findOrFail($id);
+        return view('admin.categories.edit', compact('category'));
+    }
+
+    /**
+     * Update the specified category in the database.
+     */
+    public function update(Request $request, $id)
+    {
+        $validatedData = $request->validate([
+            'name' => 'required|max:255|unique:categories',
+            'slug' => 'required|max:255|unique:categories',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'status' => 'required|in:0,1',
         ]);
-        // dd($request->all());
 
-        // $image = $request->file('image');
-        // $image_name = time().'_'.$image->getClientOriginalName();
-        // $file = $image->move(public_path('assets/images/category'), $image_name);
-        $imagePath = $request->file('image')->store('category', 'public');
-        // dd($image_name);
-        $data = [
-            'name' => $request->name,
-            'slug' => $request->slug,
-            'description' => $request->description,
-            'image' => $imagePath,
-            'status' => $request->status,
-        ];
-        // Category::create($request->all());
-        Category::create($data);
-        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
+        $category = Category::findOrFail($id);
+        $category->update($validatedData);
+
+        return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
     }
 
     /**
-     * Display the specified resource.
+     * Remove the specified category from the database.
      */
-    public function show(Category $category)
+    public function destroy($id)
     {
-        return view('categories.show', ['category' => $category]);
-    }
+        $category = Category::findOrFail($id);
+        $category->delete();
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Category $category)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Category $category)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Category $category)
-    {
-        //
-    }
-
-    function categorysubcategory(){
-        //return in json
-        $total = Category::count();
-        $categories = Category::with('subcategories')->skip(0)->take(2)->get();
-        return response()->json(['categories' => $categories, 'total' => $total]);
+        return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
     }
 }

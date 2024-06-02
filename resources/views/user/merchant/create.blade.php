@@ -1,89 +1,121 @@
-@extends('layouts.user',['title'=> 'To be a merchant'])
+@extends('layouts.user', ['title' => 'To be a merchant'])
 @section('content')
-<div class="d-flex justify-content-between">
-    <a title="back to index" style="font-size: 2em" href="{{ route('user') }}">
-        <i class="bi bi-backspace"></i>
-    </a>
-</div>
+    
 
-{{ html()->form('post', route('user'))->acceptsFiles()->open() }}
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="d-flex justify-content-between">
+                        <a title="back to index" style="font-size: 2em" href="{{ route('user') }}">
+                            <span>BACK</span>
+                        </a>
+                    </div>
+                    <div class="card-body">
+                        <form action="{{ route('merchants.store') }}" method="POST" enctype="multipart/form-data">
+                            @csrf
 
-<div class="form-group field-merchant-user_id required has-error">
-    <label class="control-label" for="merchant-user_id">User ID</label>
-    {!! html()->select('user_id', $users, old('user_id'))->class('form-select') !!}
-    <div class="help-block"></div>
-</div>
+                            <div class="form-group">
+                                <label for="name" class="form-label">{{ __('Company Name') }}</label>
+                                <input type="text" class="form-control @error('name') is-invalid @enderror"
+                                    id="name" name="name" value="{{ old('name') }}" required>
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-<div class="form-group field-merchant-company_name required">
-    <label class="control-label" for="merchant-company_name">Company Name</label>
-    {!! html()->text('company_name', old('company_name'))->class('form-control')->attributes(['maxlength' => '80']) !!}
-    <div class="help-block"></div>
-</div>
+                            <div class="form-group">
+                                <label for="phone" class="form-label">{{ __('Phone') }}</label>
+                                <input type="text" class="form-control @error('slug') is-invalid @enderror"
+                                    id="phone" name="phone" value="{{ old('phone') }}" required>
+                                @error('slug')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="tl" class="form-label">{{ __('Trade License') }}</label>
+                                <input type="text" class="form-control @error('slug') is-invalid @enderror"
+                                    id="tl" name="tl" value="{{ old('tl') }}" required>
+                                @error('slug')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="at" class="form-label">{{ __('Account Type') }}</label>
+                                <input type="text" class="form-control @error('slug') is-invalid @enderror"
+                                    id="at" name="at" value="{{ old('at') }}" required>
+                                @error('slug')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="an" class="form-label">{{ __('Account Number') }}</label>
+                                <input type="text" class="form-control @error('slug') is-invalid @enderror"
+                                    id="an" name="an" value="{{ old('an') }}" required>
+                                @error('slug')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-<div class="form-group field-merchant-phone required">
-    <label class="control-label" for="merchant-phone">Phone</label>
-    {!! html()->text('phone', old('phone'))->class('form-control')->attributes(['maxlength' => '15']) !!}
-    <div class="help-block"></div>
-</div>
+                            <div class="form-group">
+                                <label for="description" class="form-label">{{ __('Address') }}</label>
+                                <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"
+                                    rows="3" required>{{ old('description') }}</textarea>
+                                @error('description')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="city" class="form-label">{{ __('City') }}</label>
+                                <input type="text" class="form-control @error('slug') is-invalid @enderror"
+                                    id="city" name="city" value="{{ old('city') }}" required>
+                                @error('slug')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                            <div class="form-group">
+                                <label for="su" class="form-label">{{ __('site URL') }}</label>
+                                <input type="text" class="form-control @error('slug') is-invalid @enderror"
+                                    id="su" name="su" value="{{ old('su') }}" required>
+                                @error('slug')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-<div class="form-group field-merchant-trade_license required">
-    <label class="control-label" for="merchant-trade_license">Trade License</label>
-    {!! html()->text('trade_license', old('trade_license'))->class('form-control')->attributes(['maxlength' => '20']) !!}
-    <div class="help-block"></div>
-</div>
+                            <div class="form-group">
+                                <label for="logo" class="form-label">{{ __('Logo') }}</label>
+                                <input type="file" class="form-control-file @error('image') is-invalid @enderror"
+                                    id="logo" name="logo" required>
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
 
-<div class="form-group field-merchant-account_type required">
-    <label class="control-label" for="merchant-account_type">Account Type</label>
-    {!! html()->text('account_type', old('account_type'))->class('form-control') !!}
-    <div class="help-block"></div>
-</div>
 
-<div class="form-group field-merchant-account_num required">
-    <label class="control-label" for="merchant-account_num">Account Number</label>
-    {!! html()->text('account_num', old('account_num'))->class('form-control') !!}
-    <div class="help-block"></div>
-</div>
 
-<div class="form-group field-merchant-address required">
-    <label class="control-label" for="merchant-address">Address</label>
-    {!! html()->text('address', old('address'))->class('form-control')->attributes(['maxlength' => '900']) !!}
-    <div class="help-block"></div>
-</div>
-
-<div class="form-group field-merchant-city required">
-    <label class="control-label" for="merchant-city">City</label>
-    {!! html()->text('city', old('city'))->class('form-control')->attributes(['maxlength' => '180']) !!}
-    <div class="help-block"></div>
-</div>
-
-<div class="form-group field-merchant-site_url">
-    <label class="control-label" for="merchant-site_url">Website URL</label>
-    {!! html()->text('site_url', old('site_url'))->class('form-control')->attributes(['maxlength' => '180']) !!}
-    <div class="help-block"></div>
-</div>
-
-<div class="form-group">
-    <div class="form-label">Company Logo</div>
-    <input type="file" name="logo" id="logo" class="form-control">
-    <hr>
-    <!-- Display uploaded logo if available -->
-    @if (isset($merchant) && $merchant->logo)
-        <div class="d-inline-block position-relative p-3">
-            <img src="{{ asset('storage/' . $merchant->logo) }}" width="100px" alt="Company Logo" loading="lazy">
+                            <button type="submit" class="btn btn-primary">{{ __('To be Merchant') }}</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
         </div>
-    @endif
-</div>
-
-<div class="form-group field-merchant-status required">
-    <label class="control-label" for="merchant-status">Status</label>
-    {!! html()->select('status', ['1' => 'Active', '0' => 'Inactive'], old('status', 0))->class('form-select')->placeholder('Select....') !!}
-    <div class="help-block"></div>
-</div>
-
-<div class="form-group">
-    <button type="submit" class="btn btn-primary">Create Merchant</button>
-</div>
-
-{{ html()->form()->close() }}
-
+    </div>
 @endsection

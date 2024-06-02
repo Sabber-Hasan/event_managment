@@ -16,16 +16,11 @@ class CheckAdminRole
      */
     public function handle(Request $request, Closure $next): Response
     {
-        // Check if the user is authenticated
         if (Auth::check()) {
-            // Check if the authenticated user has the 'admin' role
-            if (Auth::user()->roles === 'admin') {
+            if (Auth::user()->role === 'admin') {
                 return $next($request);
             }
         }
-
-        // If not admin, redirect or return unauthorized response
-        return redirect()->route('home')->with('error', 'You are not authorized to access this page.');
-        // return $next($request);
+        return redirect()->route('dashboard')->with('error', 'You are not authorized to access this page.');
     }
 }

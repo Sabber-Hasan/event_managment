@@ -22,6 +22,7 @@
                         <table class="table">
                             <thead>
                                 <tr>
+                                    <th>#</th>
                                     <th>Name</th>
                                     <th>Slug</th>
                                     <th>Image</th>
@@ -32,6 +33,7 @@
                             <tbody>
                                 @foreach ($categories as $category)
                                     <tr>
+                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
                                         <td>

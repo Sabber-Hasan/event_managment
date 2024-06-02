@@ -21,4 +21,5 @@ class Merchant extends Model
         'logo',
         'status',
     ];
+    
 }
