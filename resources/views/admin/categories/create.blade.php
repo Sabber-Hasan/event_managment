@@ -43,7 +43,7 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group mt-3">
                                 <label for="image">{{ __('Image') }}</label>
                                 <input type="file" class="form-control-file @error('image') is-invalid @enderror"
                                     id="image" name="image" required>
@@ -54,18 +54,13 @@
                                 @enderror
                             </div>
 
-                            <div class="form-group">
-                                <label for="status">{{ __('Status') }}</label>
-                                <select class="form-control @error('status') is-invalid @enderror" id="status"
-                                    name="status" required>
-                                    <option value="1" {{ old('status') == '1' ? 'selected' : '' }}>Active</option>
-                                    <option value="0" {{ old('status') == '0' ? 'selected' : '' }}>Inactive</option>
+                            
+                            <div class="form-group mt-3 mb-3">
+                                <label for="status">status</label>
+                                <select class="form-control" name="status">
+                                    <option value="1">Active</option>
+                                    <option value="0">Inactive</option>
                                 </select>
-                                @error('status')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
                             </div>
 
                             <button type="submit" class="btn btn-primary">{{ __('Create Category') }}</button>

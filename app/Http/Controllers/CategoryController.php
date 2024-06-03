@@ -5,9 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Intervention\Gif\Exceptions\NotReadableException as ExceptionsNotReadableException;
+use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\Facades\Image;
 use Intervention\Image\ImageManager;
-use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\Exception\NotReadableException;
 
 class CategoryController extends Controller
 {
@@ -31,43 +33,45 @@ class CategoryController extends Controller
     /**
      * Store a newly created category in the database.
      */
-
-
-
-    public function store(Request $request)
-    {
+  
+     public function store(Request $request){
         $category = Category::create($request->all());
-
         if ($category) {
             if ($request->hasFile('image')) {
                 $file = $request->file('image');
-                $loc = $file->store('public/' . 'categories');
+                $loc = $file->store('public/categories');
                 $category->image = str_replace('public/', '', $loc);
                 $category->save();
-
                 $manager = new ImageManager(new Driver());
                 $image = $manager->read(Storage::path($loc));
-                $image = $image->scaleDown(width: 300)->place(storage_path("app/public"))->save(Storage::path($loc));
+                $image = $image->scaleDown(width: 800)->save(Storage::path($loc));
+            } else {
+                return redirect()->route('categories.create')->with('error', 'Image not available.');
             }
-
-            return redirect()->route("admin.categories.index")->with("success", "Category created successfully.");
+    
+            return redirect()->route('categories.index')->with('success', 'Category saved successfully. ID is ' . $category->id);
         } else {
-            echo "Category creation failed";
+            return redirect()->route('categories.create')->with('error', 'Category add failed.');
         }
     }
-    private function isImage($file)
-{
-    $mime = $file->getMimeType();
-    return in_array($mime, ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/svg+xml']);
-}
+    
+    // private function isImage($file)
+    // {
+    //     $mime = $file->getMimeType();
+    //     return in_array($mime, ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/svg+xml']);
+    // }
     /**
      * Display the specified category.
      */
     public function show($id)
-    {
-        $category = Category::findOrFail($id);
+{
+    $category = Category::find($id);
+    if ($category) {
         return view('admin.categories.show', compact('category'));
+    } else {
+        return redirect()->route('categories.index')->with('error', 'Category not found.');
     }
+}
 
     /**
      * Show the form for editing the specified category.
@@ -101,9 +105,19 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $category = Category::findOrFail($id);
-        $category->delete();
+        // Find the category by its ID
+    $category = Category::find($id);
 
-        return redirect()->route('admin.categories.index')->with('success', 'Category deleted successfully.');
+    // Check if the category exists
+    if ($category) {
+        // Delete the category
+        Category::destroy($id);
+
+        // Redirect to the categories index page with a success message
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+    } else {
+        // If the category was not found, redirect with an error message
+        return redirect()->route('categories.index')->with('error', 'Category not found.');
+    }
     }
 }

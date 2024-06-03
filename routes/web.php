@@ -7,7 +7,6 @@ use App\Http\Controllers\UserController;
 use App\Http\Middleware\CheckAdminRole;
 use App\Http\Middleware\CheckMerchantRole;
 use App\Http\Middleware\CheckUserRole;
-use Illuminate\Routing\Route as RoutingRoute;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -41,8 +40,9 @@ Route::middleware(CheckAdminRole::class)->prefix('admin')->group(function () {
 });
 Route::middleware(CheckMerchantRole::class)->group(function () {
     Route::get('/merchant', [UserController::class, 'index'])->name('merchant');
+    // Route::resource('/users', [UserController::class]);
 });
-Route::middleware(CheckUserRole::class)->group(function () {
+Route::middleware(CheckUserRole::class)->prefix('user')->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
     Route::resource('merchants', MerchantController::class);
 });

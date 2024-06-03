@@ -3,6 +3,7 @@
 @endsection
 @section('content')
     <div class="container">
+        
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
@@ -22,9 +23,9 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>#</th>
                                     <th>Name</th>
                                     <th>Slug</th>
+                                    <th>Description</th>
                                     <th>Image</th>
                                     <th>Status</th>
                                     <th>Actions</th>
@@ -33,9 +34,9 @@
                             <tbody>
                                 @foreach ($categories as $category)
                                     <tr>
-                                        <td>{{ $loop->iteration }}</td>
                                         <td>{{ $category->name }}</td>
                                         <td>{{ $category->slug }}</td>
+                                        <td>{{ $category->description }}</td>
                                         <td>
                                             @if ($category->image)
                                                 <img src="{{ asset('storage/' . $category->image) }}"
@@ -46,7 +47,24 @@
                                         </td>
                                         <td>{{ $category->status ? 'Active' : 'Inactive' }}</td>
                                         <td>
-                                            <!-- Add edit and delete buttons here -->
+                                            <ul>
+                                            <li><a href="#"></a></li>
+                                            <li><a href="{{ route('categories.show', $category) }}"><span class="bg-success">show</span></a></li>
+                                            <li><form action="{{ route('categories.destroy', $category) }}" method="POST"
+                                                class="d-inline">
+                                                @csrf
+                                                @method('DELETE')
+                                                <button type="submit" class="btn btn-sm btn-outline-danger"
+                                                    onclick="return confirm('Are you sure you want to delete this data?')">
+                                                    <span>delet</span>
+                                                </button>
+                                            </form>
+                                        </li>
+                                        </ul>
+                                            
+                                       
+
+                                            
                                         </td>
                                     </tr>
                                 @endforeach
