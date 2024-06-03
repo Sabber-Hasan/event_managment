@@ -1,0 +1,11 @@
+Merge remote-tracking branch 'origin/main'
+# Please enter a commit message to explain why this merge is necessary,
+# especially if it merges an updated upstream into a topic branch.
+#
+# I have changed on remote branch
+
+# the commit
+#I changed some of from local branch
+merge branch 'main' of https://github.com/Sabber-Hasan/event_managment
+into main
+

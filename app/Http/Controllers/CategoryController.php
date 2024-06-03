@@ -33,8 +33,9 @@ class CategoryController extends Controller
     /**
      * Store a newly created category in the database.
      */
-  
-     public function store(Request $request){
+
+    public function store(Request $request)
+    {
         $category = Category::create($request->all());
         if ($category) {
             if ($request->hasFile('image')) {
@@ -48,30 +49,26 @@ class CategoryController extends Controller
             } else {
                 return redirect()->route('categories.create')->with('error', 'Image not available.');
             }
-    
+
             return redirect()->route('categories.index')->with('success', 'Category saved successfully. ID is ' . $category->id);
         } else {
             return redirect()->route('categories.create')->with('error', 'Category add failed.');
         }
     }
-    
-    // private function isImage($file)
-    // {
-    //     $mime = $file->getMimeType();
-    //     return in_array($mime, ['image/jpeg', 'image/png', 'image/gif', 'image/bmp', 'image/svg+xml']);
-    // }
+
+
     /**
      * Display the specified category.
      */
     public function show($id)
-{
-    $category = Category::find($id);
-    if ($category) {
-        return view('admin.categories.show', compact('category'));
-    } else {
-        return redirect()->route('categories.index')->with('error', 'Category not found.');
+    {
+        $category = Category::find($id);
+        if ($category) {
+            return view('admin.categories.show', compact('category'));
+        } else {
+            return redirect()->route('categories.index')->with('error', 'Category not found.');
+        }
     }
-}
 
     /**
      * Show the form for editing the specified category.
@@ -105,19 +102,21 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        // Find the category by its ID
-    $category = Category::find($id);
-
-    // Check if the category exists
-    if ($category) {
-        // Delete the category
-        Category::destroy($id);
-
-        // Redirect to the categories index page with a success message
-        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
-    } else {
-        // If the category was not found, redirect with an error message
-        return redirect()->route('categories.index')->with('error', 'Category not found.');
-    }
+        $category = Category::find($id);
+        if ($category) {
+            if ($category->image) {
+                Storage::delete('public/' . $category->image);
+            }
+            $category->delete();
+        // if ($category) {
+        //     Category::destroy($id);
+        //     Storage::delete($category->name);
+        //     $category->delete;
+            // Redirect to the categories index page with a success message
+            return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
+        } else {
+            // If the category was not found, redirect with an error message
+            return redirect()->route('categories.index')->with('error', 'Category not found.');
+        }
     }
 }
