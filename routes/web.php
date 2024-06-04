@@ -26,8 +26,20 @@ Route::get('/checkuser', function () {
 })->middleware(['auth'])->name('checkuser');
 
 Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    if (Auth::user()->role ==='admin') {
+        return redirect()->intended(route('admin', absolute:false));
+    }
+    if (Auth::user()->role ==='merchant') {
+        return redirect()->intended(route('merchant', absolute:false));
+    }
+    if (Auth::user()->role ==='user') {
+        return redirect()->intended(route('user', absolute:false));
+    }
+})->middleware(['auth'])->name('checkuser');
+
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

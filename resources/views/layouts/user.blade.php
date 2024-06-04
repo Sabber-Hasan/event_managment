@@ -90,10 +90,9 @@
                             </a>
     
                             <!-- item-->
-                            <a href="auth-lock-screen.html" class="dropdown-item notify-item">
-                                
-                                <span>Lock Screen</span>
-                            </a>
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
     
                             <div class="dropdown-divider"></div>
     

@@ -19,7 +19,7 @@ class CategoryController extends Controller
     public function index()
     {
         $categories = Category::all();
-        return view('admin.categories.index', compact('categories'));
+        return view('admin.categories.index', ['categories' => $categories]);
     }
 
     /**
@@ -75,29 +75,41 @@ class CategoryController extends Controller
      */
     public function edit($id)
     {
-        $category = Category::findOrFail($id);
+        $category = Category::find($id);
         return view('admin.categories.edit', compact('category'));
     }
 
     /**
      * Update the specified category in the database.
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Category $category)
     {
-        $validatedData = $request->validate([
-            'name' => 'required|max:255|unique:categories',
-            'slug' => 'required|max:255|unique:categories',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-            'status' => 'required|in:0,1',
-        ]);
+    // dd($categoty);
+    // dd($request);
+    //delete previous image form drive before update new one
+    Storage::delete('public/' . $category->image);
+    $category->update($request->except('_token'));
+    if ($category) {
+        if ($request->hasFile('image')) {
+            $file = $request->file('image');
+            $loc = $file->store('public/categories');
+            $category->image = str_replace('public/', '', $loc);
+            $category->save();
+            $manager = new ImageManager(new Driver());
+            $image = $manager->read(Storage::path($loc));
+            $image = $image->scaleDown(width: 800)->save(Storage::path($loc));
+        } else {
+            return redirect()->route('categories.create')->with('error', 'Image not available.');
+        }
 
-        $category = Category::findOrFail($id);
-        $category->update($validatedData);
-
-        return redirect()->route('admin.categories.index')->with('success', 'Category updated successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category update successfully');
+    } else {
+        return redirect()->route('categories.create')->with('error', 'Category add failed.');
     }
+    // return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
+}
 
-    /**
+    /**view
      * Remove the specified category from the database.
      */
     public function destroy($id)
@@ -105,14 +117,19 @@ class CategoryController extends Controller
         $category = Category::find($id);
         if ($category) {
             if ($category->image) {
+                //image delete from drive
                 Storage::delete('public/' . $category->image);
             }
             $category->delete();
+
+//image delete from only DB fieeld
         // if ($category) {
-        //     Category::destroy($id);
-        //     Storage::delete($category->name);
-        //     $category->delete;
-            // Redirect to the categories index page with a success message
+        //     if ($category->image) {
+        //         Storage::delete($category->image);
+        //     }
+        //     $category->delete();
+        //     Redirect to the categories index page with a success message 
+
             return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
         } else {
             // If the category was not found, redirect with an error message

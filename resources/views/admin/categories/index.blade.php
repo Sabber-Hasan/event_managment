@@ -48,7 +48,7 @@
                                         <td>{{ $category->status ? 'Active' : 'Inactive' }}</td>
                                         <td>
                                            
-                                         <a href="#"><i class="bi bi-pencil-fill"></i></a>
+                                         <a href="{{ route('categories.edit' , $category) }}"><i class="bi bi-pencil-fill"></i></a>
 
                                             <a href="{{ route('categories.show', $category) }}"><i class="bi bi-eye-fill"></i></a>
                                             
