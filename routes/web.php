@@ -35,7 +35,7 @@ Route::get('/dashboard', function () {
     if (Auth::user()->role ==='user') {
         return redirect()->intended(route('user', absolute:false));
     }
-})->middleware(['auth'])->name('checkuser');
+})->middleware(['auth'])->name('dashboard');
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

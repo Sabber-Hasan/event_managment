@@ -7,7 +7,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="d-flex justify-content-between">
-                        <a title="back to index" style="font-size: 2em" href="{{ route('user') }}">
+                        <a title="back to index" style="font-size: 2em" href="{{ url()->previous() }}">
                             <span>BACK</span>
                         </a>
                     </div>

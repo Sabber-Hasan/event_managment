@@ -241,29 +241,18 @@
                         </a>
 
                         <!-- item-->
-                        <a href="auth-lock-screen.html" class="dropdown-item notify-item">
-                            <i class="fe-lock"></i>
-                            <span>Lock Screen</span>
-                        </a>
-
-                        <div class="dropdown-divider"></div>
-
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
                         <!-- item-->
-                        <a href="" class="dropdown-item notify-item">
-                            <i class="fe-log-out"></i>
-                            <span>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-
-                                    <x-dropdown-link :href="route('logout')"
-                                        onclick="event.preventDefault();
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault();
                                                         this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link>
-                                </form>
-                            </span>
-                        </a>
-
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
                     </div>
                 </li>
 
@@ -323,10 +312,10 @@
 
                     <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="user-img" title="Mat Helme"
                         class="rounded-circle img-thumbnail avatar-md">
-                    <div class="dropdown">
-                        <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block"
-                            data-bs-toggle="dropdown" aria-expanded="false">Nowak Helme</a>
-                        <div class="dropdown-menu user-pro-dropdown">
+                        <div class="dropdown">
+                            <a href="#" class="user-name dropdown-toggle h5 mt-2 mb-1 d-block"
+                                data-bs-toggle="dropdown" aria-expanded="false"> {{ Auth::user()->name }}</a>
+                            <div class="dropdown-menu user-pro-dropdown">
 
                             <!-- item-->
                             <a href="javascript:void(0);" class="dropdown-item notify-item">
@@ -340,22 +329,24 @@
                                 <span>Settings</span>
                             </a>
 
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-lock me-1"></i>
-                                <span>Lock Screen</span>
-                            </a>
-
-                            <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-log-out me-1"></i>
-                                <span>Logout</span>
-                            </a>
+                                <!-- item-->
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
+                        <!-- item-->
+                        <form method="POST" action="{{ route('logout') }}">
+                            @csrf
+                            <x-dropdown-link :href="route('logout')"
+                                onclick="event.preventDefault();
+                                                        this.closest('form').submit();">
+                                {{ __('Log Out') }}
+                            </x-dropdown-link>
+                        </form>
 
                         </div>
                     </div>
 
-                    <p class="text-muted left-user-info">Admin Head</p>
+                    <p class="text-muted left-user-info">{{ Auth::user()->name }} Head</p>
 
                     <ul class="list-inline">
                         <li class="list-inline-item">

@@ -241,10 +241,9 @@
                         </a>
 
                         <!-- item-->
-                        <a href="auth-lock-screen.html" class="dropdown-item notify-item">
-                            
-                            <span>Lock Screen</span>
-                        </a>
+                        <x-dropdown-link :href="route('profile.edit')">
+                            {{ __('Profile') }}
+                        </x-dropdown-link>
 
                         <div class="dropdown-divider"></div>
 
@@ -340,10 +339,9 @@
                             </a>
 
                             <!-- item-->
-                            <a href="javascript:void(0);" class="dropdown-item notify-item">
-                                <i class="fe-lock me-1"></i>
-                                <span>Lock Screen</span>
-                            </a>
+                            <x-dropdown-link :href="route('profile.edit')">
+                                {{ __('Profile') }}
+                            </x-dropdown-link>
 
                             <!-- item-->
                            
@@ -363,7 +361,7 @@
                         </div>
                     </div>
 
-                    <p class="text-muted left-user-info">Admin Head</p>
+                    <p class="text-muted left-user-info">{{ Auth::user()->name }} Head</p>
 
                     <ul class="list-inline">
                         <li class="list-inline-item">
