@@ -51,6 +51,7 @@ Route::middleware('auth')->group(function () {
 Route::middleware(CheckAdminRole::class)->group(function () {
     Route::get('/admin', [UserController::class, 'index'])->name('admin');
     Route::resource('categories', CategoryController::class);
+    Route::resource('merchants', MerchantController::class);
     
 });
 Route::middleware(CheckMerchantRole::class)->group(function () {
@@ -61,13 +62,6 @@ Route::middleware(CheckUserRole::class)->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
     
 });
-Route::middleware('auth')->group(function () {
-    Route::resource('merchants', MerchantController::class);
-    
-});
-Route::middleware([CheckAdminRole::class, CheckUserRole::class])->group(function () {
-    Route::resource('merchants', MerchantController::class);
-    
-});
+
 
 require __DIR__.'/auth.php';

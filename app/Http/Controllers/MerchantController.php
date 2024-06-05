@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Middleware\CheckUserRole;
 use App\Models\Merchant;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -29,6 +30,7 @@ class MerchantController extends Controller
      */
     public function create()
     {
+        $this->middleware(CheckUserRole::class)->only('create');
         // $users = User::find();
         return view('user.merchant.create')
             // ->with('users', $users)

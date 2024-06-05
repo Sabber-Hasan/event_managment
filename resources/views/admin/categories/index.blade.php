@@ -5,7 +5,7 @@
     <div class="container">
         
         <div class="row justify-content-center">
-            <div class="col-md-8">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <span>{{ __('Categories') }}</span>
@@ -47,11 +47,12 @@
                                         </td>
                                         <td>{{ $category->status ? 'Active' : 'Inactive' }}</td>
                                         <td>
-                                           
+                                            <button type="submit" class="btn btn-sm btn-outline-success">
                                          <a href="{{ route('categories.edit' , $category) }}"><i class="bi bi-pencil-fill"></i></a>
-
+                                        </button>
+                                         <button type="submit" class="btn btn-sm btn-outline-info">
                                             <a href="{{ route('categories.show', $category) }}"><i class="bi bi-eye-fill"></i></a>
-                                            
+                                        </button>
                                             <form action="{{ route('categories.destroy', $category) }}" method="POST"
                                                 class="d-inline">
                                                 @csrf

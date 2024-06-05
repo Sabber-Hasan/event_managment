@@ -11,7 +11,7 @@
 
     </a>
         <h1>View Category</h1>
-        <h1>View Subcategory</h1>
+        
         <h3>{{ $category->name }}</h3>
         <h3>{{ $category->slug }}</h3>
         <p>{{ $category->description }}</p>
