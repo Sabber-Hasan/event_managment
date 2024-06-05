@@ -1,4 +1,4 @@
-@extends('layouts.admin' , ['title' => 'dashboard'])
+@extends('layouts.admin' , ['title' => ' Admin Dashboard'])
 @section('content')
     <div class="row">
         <div class="col lg-4"><h1>content</h1></div>

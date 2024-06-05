@@ -20,6 +20,7 @@ class CategoryController extends Controller
     {
         $categories = Category::all();
         return view('admin.categories.index', ['categories' => $categories]);
+        // return view('admin.categories.index', compact('category'));
     }
 
     /**
@@ -43,6 +44,7 @@ class CategoryController extends Controller
                 $loc = $file->store('public/categories');
                 $category->image = str_replace('public/', '', $loc);
                 $category->save();
+                //image intervention start(imag resize)
                 $manager = new ImageManager(new Driver());
                 $image = $manager->read(Storage::path($loc));
                 $image = $image->scaleDown(width: 800)->save(Storage::path($loc));

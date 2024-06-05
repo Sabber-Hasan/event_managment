@@ -11,7 +11,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('user.dashboard');
 });
 Route::get('/checkuser', function () {
     if (Auth::user()->role ==='admin') {
@@ -45,18 +45,20 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::resource('merchants', MerchantController::class);
 });
-Route::middleware(CheckAdminRole::class)->prefix('admin')->group(function () {
+Route::middleware(CheckAdminRole::class)->group(function () {
     Route::get('/admin', [UserController::class, 'index'])->name('admin');
     Route::resource('categories', CategoryController::class);
+    // Route::resource('merchants', MerchantController::class);
 });
 Route::middleware(CheckMerchantRole::class)->group(function () {
     Route::get('/merchant', [UserController::class, 'index'])->name('merchant');
-    // Route::resource('/users', [UserController::class]);
+    // Route::resource('merchants', MerchantController::class);
 });
-Route::middleware(CheckUserRole::class)->prefix('user')->group(function () {
+Route::middleware(CheckUserRole::class)->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
-    Route::resource('merchants', MerchantController::class);
+    // Route::resource('merchants', MerchantController::class);
 });
 
 require __DIR__.'/auth.php';

@@ -4,7 +4,7 @@
 <head>
 
     <meta charset="utf-8" />
-    <title>Admin {{ $title }}</title>
+    <title>{{ $title }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta content="A fully featured admin theme which can be used to build CRM, CMS, etc." name="description" />
     <meta content="Coderthemes" name="author" />
@@ -15,7 +15,7 @@
     @yield('head')
 
     <!-- App css -->
-   
+
     <link href="{{ asset('assets/css/app.min.css') }}" rel="stylesheet" type="text/css" id="app-style" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- icons -->
@@ -225,7 +225,7 @@
                         <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="user-image"
                             class="rounded-circle">
                         <span class="pro-user-name ms-1">
-                            {{ Auth::user()->name }} 
+                            {{ Auth::user()->name }}
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -236,7 +236,7 @@
 
                         <!-- item-->
                         <a href="contacts-profile.html" class="dropdown-item notify-item">
-                           
+
                             <span>My Account</span>
                         </a>
 
@@ -248,19 +248,19 @@
                         <div class="dropdown-divider"></div>
 
                         <!-- item-->
-                        
-                            <span>
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-        
-                                    <x-dropdown-link :href="route('logout')"
-                                            onclick="event.preventDefault();
+
+                        <span>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
                                                         this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link>
-                                </form>
-                            </span>
-                       
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+                            </form>
+                        </span>
+
 
                     </div>
                 </li>
@@ -275,7 +275,7 @@
 
             <!-- LOGO -->
             <div class="logo-box">
-                <a href="{{route('admin')}}" class="logo logo-light text-center">
+                <a href="{{ route('admin') }}" class="logo logo-light text-center">
                     <span class="logo-sm">
                         <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                     </span>
@@ -283,7 +283,7 @@
                         <img src="{{ asset('assets/images/logo-light.png') }}" alt="" height="16">
                     </span>
                 </a>
-                <a href="{{route('admin')}}" class="logo logo-dark text-center">
+                <a href="{{ route('admin') }}" class="logo logo-dark text-center">
                     <span class="logo-sm">
                         <img src="{{ asset('assets/images/logo-sm.png') }}" alt="" height="22">
                     </span>
@@ -344,19 +344,19 @@
                             </x-dropdown-link>
 
                             <!-- item-->
-                           
-                                
-                                <form method="POST" action="{{ route('logout') }}">
-                                    @csrf
-                                  
-                                    <x-dropdown-link :href="route('logout')"
-                                            onclick="event.preventDefault();
+
+
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
                                                         this.closest('form').submit();">
-                                        {{ __('Log Out') }}
-                                    </x-dropdown-link>
-                                </form>
-                                
-                         
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+                            </form>
+
+
 
                         </div>
                     </div>
@@ -386,7 +386,7 @@
                         <li class="menu-title">Navigation</li>
 
                         <li>
-                            <a href="{{route('admin')}}">
+                            <a href="{{ route('admin') }}">
                                 <i class="mdi mdi-view-dashboard-outline"></i>
                                 <span class="badge bg-success rounded-pill float-end">9+</span>
                                 <span> Dashboard </span>
@@ -396,45 +396,79 @@
                         <li class="menu-title mt-2">Features</li>
 
                         <li>
-                            <a href="#email" data-bs-toggle="collapse">
-                                <i class="mdi mdi-email-outline"></i>
-                                <span> Roles </span>
+                            <a href="#sidebarMultilevel" data-bs-toggle="collapse">
+                                <i class="mdi mdi-share-variant"></i>
+                                <span>Roles</span>
                                 <span class="menu-arrow"></span>
                             </a>
-                            <div class="collapse" id="email">
+                            <div class="collapse" id="sidebarMultilevel">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a href="email-inbox.html">Inbox</a>
+                                        <a href="#sidebarMultilevel2" data-bs-toggle="collapse">
+                                            Admins Role <span class="menu-arrow"></span>
+                                        </a>
+                                        <div class="collapse" id="sidebarMultilevel2">
+                                            <ul class="nav-second-level">
+                                                <li>
+                                                    <a href="#">Show All</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript: void(0);">Add New</a>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <a href="#sidebarMultilevel3" data-bs-toggle="collapse">
+                                            Merchants Role <span class="menu-arrow"></span>
+                                        </a>
+                                        <div class="collapse" id="sidebarMultilevel3">
+                                            <ul class="nav-second-level">
+                                                <li>
+                                                    <a href="{{ route('merchants.index')}}">Show All</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript: void(0);">Add New</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
                                     <li>
-                                        <a href="email-templates.html">Email Templates</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </li>
-                        <li>
-                            <a href="#email" data-bs-toggle="collapse">
-                                <i class="mdi mdi-email-outline"></i>
-                                <span> Roles </span>
-                                <span class="menu-arrow"></span>
-                            </a>
-                            <div class="collapse" id="email">
-                                <ul class="nav-second-level">
-                                    <li>
-                                        <a href="email-inbox.html">Inbox</a>
-                                    </li>
-                                    <li>
-                                        <a href="email-templates.html">Email Templates</a>
+                                        <a href="#sidebarMultilevel4" data-bs-toggle="collapse">
+                                            Users Role <span class="menu-arrow"></span>
+                                        </a>
+                                        <div class="collapse" id="sidebarMultilevel4">
+                                            <ul class="nav-second-level">
+                                                <li>
+                                                    <a href="javascript: void(0);">Show All</a>
+                                                </li>
+                                                <li>
+                                                    <a href="javascript: void(0);">Add New</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
                         </li>
 
                         <li>
-                            <a href="{{route('categories.index')}}">
-                                <i class="mdi mdi-calendar-blank-outline"></i>
-                                <span> Categories </span>
+                            <a href="#email" data-bs-toggle="collapse">
+                                <i class="mdi mdi-email-outline"></i>
+                                <span> Category </span>
+                                <span class="menu-arrow"></span>
                             </a>
+                            <div class="collapse" id="email">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="{{ route('categories.index') }}">Show All</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('categories.create') }}">Add New</a>
+                                    </li>
+                                </ul>
+                            </div>
                         </li>
                         <li>
                             <a href="apps-calendar.html">
@@ -443,7 +477,7 @@
                             </a>
                         </li>
 
-                        <li>
+                        {{-- <li>
                             <a href="#email" data-bs-toggle="collapse">
                                 <i class="mdi mdi-email-outline"></i>
                                 <span> Email </span>
@@ -459,11 +493,11 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
 
-                        
 
-                       
+
+
 
                         <li>
                             <a href="#contacts" data-bs-toggle="collapse">
@@ -816,7 +850,7 @@
                             </div>
                         </li>
 
-                        <li>
+                        {{-- <li>
                             <a href="#sidebarMultilevel" data-bs-toggle="collapse">
                                 <i class="mdi mdi-share-variant"></i>
                                 <span> Multi Level </span>
@@ -869,7 +903,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
                     </ul>
 
                 </div>
@@ -1106,10 +1140,10 @@
 
     <!-- App js-->
     <script src="{{ asset('assets/js/app.min.js') }}"></script>
-    
+
     {{-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script> --}}
-        @yield('script')
-    
+    @yield('script')
+
 
 </body>
 

@@ -3,7 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Models\Merchant;
+use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Intervention\Image\Drivers\Gd\Driver;
+use Intervention\Image\ImageManager;
 
 class MerchantController extends Controller
 {
@@ -12,8 +16,9 @@ class MerchantController extends Controller
      */
     public function index()
     {
-       $merchant=Merchant::all() ;
-       return view('admin.merchant.create');
+        $merchants = Merchant::with('category');
+        return view('admin.merchants.index', compact('merchants'));
+        // return view('admin.merchants.index', ['merchants' => $merchants]);
     }
 
     /**
@@ -21,7 +26,8 @@ class MerchantController extends Controller
      */
     public function create()
     {
-       return view('user.merchant.create');
+        $users = User::find();
+        return view('user.merchant.create')->with('users', $users);
     }
 
     /**
@@ -29,28 +35,27 @@ class MerchantController extends Controller
      */
     public function store(Request $request)
     {
-         // Validate the request data
-        //  $validatedData = $request->validate([
-        //     'user_id' => 'nullable|integer|exists:users,id',
-        //     'company_name' => 'required|string|max:80',
-        //     'phone' => 'required|string|max:15',
-        //     'trade_license' => 'required|string|max:20',
-        //     'account_type' => 'required|string',
-        //     'account_num' => 'required|string',
-        //     'address' => 'required|string|max:900',
-        //     'city' => 'required|string|max:180',
-        //     'site_url' => 'nullable|url|max:180',
-        //     'logo' => 'nullable|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
-        //     'status' => 'nullable|boolean', // Allow nullable for status, will default to 0
-        //  ]);
-         $merchants = Merchant::create($request->all());
-        //  dd($request->all());
-        //  if ($merchant) {
-        //     if ($request->hasFile('logo')) {
-        //         $logo=$request->file('logo');
-            
-        //  }
-        // }
+
+        $merchant = Merchant::create($request->all());
+        if ($merchant) {
+            if ($request->hasFile('logo')) {
+                $file = $request->file('logo');
+                $loc = $file->store('public/merchants');
+                $merchant->logo = str_replace('public/', '', $loc);
+                $merchant->save();
+                //image intervention start(imag resize)
+                $manager = new ImageManager(new Driver());
+                $image = $manager->read(Storage::path($loc));
+                $image = $image->scaleDown(width: 300)->save(Storage::path($loc));
+            } else {
+                return redirect()->route('merchants.create')->with('error', 'Image not available.');
+            }
+
+            return redirect()->route('user')->with('success', 'Merchant Rgistration successfully. User ID  ' . $merchant->id .'will be merchant within 24 hour' );
+        } else {
+            return redirect()->route('merchants.create')->with('error', 'Merchant add failed.');
+        }
+
     }
 
     /**
