@@ -18,8 +18,8 @@
                         <form action="{{ route('merchants.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
 
-                            <div class="form-group">
-                                {{-- <label for="uid" class="form-label">{{ __('User id') }}</label> --}}
+                            {{-- <div class="form-group">
+                                <label for="uid" class="form-label">{{ __('User id') }}</label>
                                 <input type="hidden" class="form-control @error('uid') is-invalid @enderror"
                                     id="uid" name="uid" value="{{ $users }}" required>
                                 @error('uid')
@@ -27,7 +27,7 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
-                            </div>
+                            </div> --}}
                             <div class="form-group">
                                 <label for="name" class="form-label">{{ __('Company Name') }}</label>
                                 <input type="text" class="form-control @error('name') is-invalid @enderror"

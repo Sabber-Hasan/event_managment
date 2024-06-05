@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\MenuController;
 use App\Http\Controllers\MerchantController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\UserController;
@@ -45,20 +46,28 @@ Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-    Route::resource('merchants', MerchantController::class);
+    
 });
 Route::middleware(CheckAdminRole::class)->group(function () {
     Route::get('/admin', [UserController::class, 'index'])->name('admin');
     Route::resource('categories', CategoryController::class);
-    // Route::resource('merchants', MerchantController::class);
+    
 });
 Route::middleware(CheckMerchantRole::class)->group(function () {
     Route::get('/merchant', [UserController::class, 'index'])->name('merchant');
-    // Route::resource('merchants', MerchantController::class);
+    Route::resource('menus', MenuController::class);
 });
 Route::middleware(CheckUserRole::class)->group(function () {
     Route::get('/user', [UserController::class, 'index'])->name('user');
-    // Route::resource('merchants', MerchantController::class);
+    
+});
+Route::middleware('auth')->group(function () {
+    Route::resource('merchants', MerchantController::class);
+    
+});
+Route::middleware([CheckAdminRole::class, CheckUserRole::class])->group(function () {
+    Route::resource('merchants', MerchantController::class);
+    
 });
 
 require __DIR__.'/auth.php';

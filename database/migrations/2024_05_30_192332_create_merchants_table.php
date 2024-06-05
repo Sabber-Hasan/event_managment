@@ -15,13 +15,13 @@ return new class extends Migration
             $table->id();
             $table->bigInteger('user_id')->unsigned()->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
-            $table->string('company_name', 80);
-            $table->string('phone', 15);
-            $table->string('trade_license', 20);
-            $table->string('account_type');
-            $table->string('account_num');
-            $table->string('address', 900); // Fixed the typo from 'addres' to 'address'
-            $table->string('city', 180);
+            $table->string('company_name', 80)->nullable;
+            $table->string('phone', 15)->nullable;
+            $table->string('trade_license', 20)->nullable;
+            $table->string('account_type')->nullable;
+            $table->string('account_num')->nullable;
+            $table->string('address', 900)->nullable; // Fixed the typo from 'addres' to 'address'
+            $table->string('city', 180)->nullable;
             $table->string('site_url', 180)->nullable();
             $table->string('logo')->nullable(); // Added logo field
             $table->set('status', [1, 0])->default(0); // Fixed the typo from 'stauts' to 'status'

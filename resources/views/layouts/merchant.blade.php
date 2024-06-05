@@ -226,7 +226,7 @@
                         <img src="{{ asset('assets/images/users/user-1.jpg') }}" alt="user-image"
                             class="rounded-circle">
                         <span class="pro-user-name ms-1">
-                            {{ Auth::user()->name }} <i class="mdi mdi-chevron-down"></i>
+                            {{ Auth::user()->name }}
                         </span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end profile-dropdown ">
@@ -237,7 +237,7 @@
 
                         <!-- item-->
                         <a href="contacts-profile.html" class="dropdown-item notify-item">
-                            <i class="fe-user"></i>
+
                             <span>My Account</span>
                         </a>
 
@@ -245,15 +245,24 @@
                         <x-dropdown-link :href="route('profile.edit')">
                             {{ __('Profile') }}
                         </x-dropdown-link>
+
+                        <div class="dropdown-divider"></div>
+
                         <!-- item-->
-                        <form method="POST" action="{{ route('logout') }}">
-                            @csrf
-                            <x-dropdown-link :href="route('logout')"
-                                onclick="event.preventDefault();
+
+                        <span>
+                            <form method="POST" action="{{ route('logout') }}">
+                                @csrf
+
+                                <x-dropdown-link :href="route('logout')"
+                                    onclick="event.preventDefault();
                                                         this.closest('form').submit();">
-                                {{ __('Log Out') }}
-                            </x-dropdown-link>
-                        </form>
+                                    {{ __('Log Out') }}
+                                </x-dropdown-link>
+                            </form>
+                        </span>
+
+
                     </div>
                 </li>
 
@@ -382,6 +391,24 @@
                         <li class="menu-title mt-2">Apps</li>
 
                         <li>
+                            <a href="#email" data-bs-toggle="collapse">
+                                <i class="mdi mdi-email-outline"></i>
+                                <span> Menus </span>
+                                <span class="menu-arrow"></span>
+                            </a>
+                            <div class="collapse" id="email">
+                                <ul class="nav-second-level">
+                                    <li>
+                                        <a href="{{ route('menus.index')}}">Show All</a>
+                                    </li>
+                                    <li>
+                                        <a href="{{ route('menus.create')}}">Add New</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+
+                        <li>
                             <a href="apps-calendar.html">
                                 <i class="mdi mdi-calendar-blank-outline"></i>
                                 <span> Calendar </span>
@@ -395,7 +422,7 @@
                             </a>
                         </li>
 
-                        <li>
+                        {{-- <li>
                             <a href="#email" data-bs-toggle="collapse">
                                 <i class="mdi mdi-email-outline"></i>
                                 <span> Email </span>
@@ -411,7 +438,7 @@
                                     </li>
                                 </ul>
                             </div>
-                        </li>
+                        </li> --}}
 
                         <li>
                             <a href="#sidebarTasks" data-bs-toggle="collapse">

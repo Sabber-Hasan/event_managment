@@ -45,8 +45,8 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
-    public function merchant()
-{
-    return $this->hasOne(Merchant::class);
-}
+    public function merchant(): HasOne
+    {
+        return $this->hasOne(Merchant::class);
+    }
 }

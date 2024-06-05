@@ -5,9 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Merchant;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Storage;
 use Intervention\Image\Drivers\Gd\Driver;
 use Intervention\Image\ImageManager;
+
+use function PHPUnit\Framework\returnSelf;
 
 class MerchantController extends Controller
 {
@@ -26,8 +29,10 @@ class MerchantController extends Controller
      */
     public function create()
     {
-        $users = User::find();
-        return view('user.merchant.create')->with('users', $users);
+        // $users = User::find();
+        return view('user.merchant.create')
+            // ->with('users', $users)
+        ;
     }
 
     /**
@@ -35,7 +40,6 @@ class MerchantController extends Controller
      */
     public function store(Request $request)
     {
-
         $merchant = Merchant::create($request->all());
         if ($merchant) {
             if ($request->hasFile('logo')) {
@@ -51,11 +55,11 @@ class MerchantController extends Controller
                 return redirect()->route('merchants.create')->with('error', 'Image not available.');
             }
 
-            return redirect()->route('user')->with('success', 'Merchant Rgistration successfully. User ID  ' . $merchant->id .'will be merchant within 24 hour' );
+            return redirect()->route('user')->with('success', 'Merchant Rgistration successfully. User ID  ' . $merchant->id . 'will be merchant within 24 hour');
         } else {
             return redirect()->route('merchants.create')->with('error', 'Merchant add failed.');
         }
-
+        
     }
 
     /**
