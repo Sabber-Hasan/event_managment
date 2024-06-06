@@ -30,8 +30,7 @@ class MerchantController extends Controller
      */
     public function create()
     {
-        $this->middleware(CheckUserRole::class)->only('create');
-        // $users = User::find();
+        
         return view('user.merchant.create')
             // ->with('users', $users)
         ;

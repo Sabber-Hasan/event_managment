@@ -54,10 +54,12 @@
                                         <td>{{ $menu->status ? 'Active' : 'Inactive' }}</td>
                                         <td>
                                            
-                                         <a href="{{ route('menus.edit' , $menu) }}"><i class="bi bi-pencil-fill"></i></a>
-
-                                            <a href="{{ route('menus.show', $menu) }}"><i class="bi bi-eye-fill"></i></a>
-                                            
+                                            <button type="submit" class="btn btn-sm btn-outline-success">
+                                                <a href="{{ route('menus.edit' , $menu) }}"><i class="bi bi-pencil-fill"></i></a>
+                                               </button>
+                                                <button type="submit" class="btn btn-sm btn-outline-info">
+                                                   <a href="{{ route('menus.show', $menu) }}"><i class="bi bi-eye-fill"></i></a>
+                                               </button> 
                                             <form action="{{ route('menus.destroy', $menu) }}" method="POST"
                                                 class="d-inline">
                                                 @csrf

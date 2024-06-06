@@ -424,10 +424,10 @@
                             <div class="collapse" id="platters">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a href="{{ route('categories.index') }}">Show All</a>
+                                        <a href="#">Show All</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('categories.create') }}">Add New</a>
+                                        <a href="{{ route('platters.create') }}">Add New</a>
                                     </li>
                                 </ul>
                             </div>
@@ -442,10 +442,10 @@
                             <div class="collapse" id="partycenter">
                                 <ul class="nav-second-level">
                                     <li>
-                                        <a href="{{ route('categories.index') }}">Show All</a>
+                                        <a href="{{ route('halls.index') }}">Show All</a>
                                     </li>
                                     <li>
-                                        <a href="{{ route('categories.create') }}">Add New</a>
+                                        <a href="{{ route('halls.create') }}">Add New</a>
                                     </li>
                                 </ul>
                             </div>

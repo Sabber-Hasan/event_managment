@@ -54,4 +54,8 @@ class Merchant extends Model
     {
         return $this->hasMany(Menu::class);
     }
+    public function hall(): HasMany
+    {
+        return $this->hasMany(Hall::class);
+    }
 }
