@@ -58,7 +58,7 @@ class MenuController extends Controller
                 //image intervention start(imag resize)
                 $manager = new ImageManager(new Driver());
                 $image = $manager->read(Storage::path($loc));
-                $image = $image->scaleDown(width: 800)->save(Storage::path($loc));
+                $image = $image->scaleDown(width: 1000)->save(Storage::path($loc));
             } else {
                 return redirect()->route('menus.create')->with('error', 'Image not available.');
             }

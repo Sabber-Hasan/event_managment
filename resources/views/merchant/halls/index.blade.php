@@ -26,7 +26,7 @@
                         <thead>
                             <tr>
                                 <th>#</th>
-                                <th>Merchant Name</th>
+                                <th>Name</th>
                                 <th>Image</th>
                                 <th>Capacity</th>
                                 {{-- <th>Description</th> --}}
